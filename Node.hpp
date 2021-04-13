@@ -38,9 +38,9 @@ namespace ft {
 	**	METHODS							**
 	*************************************/
 	public:
-		void insertBefore(Node *n);
-		void insertAfter(Node *n);
-		void disconnect(void);
+		void pasteBefore(Node *n);
+		void pasteAfter(Node *n);
+		void cut(void);
 		void swap(Node *n);
 		void swapValues(Node *n);
 		void expand(void);
@@ -96,6 +96,7 @@ namespace ft {
 		_next(next) {}
 
 
+//	TODO have I need more getters?
 	/**	GETTERS							**/
 	template<typename value_type>
 	value_type Node<value_type>::getData() const {
@@ -115,7 +116,7 @@ namespace ft {
 
 	/**	METHODS							**/
 	template<typename value_type>
-	void Node<value_type>::insertBefore(Node *n) {
+	void Node<value_type>::pasteBefore(Node *n) {
 		if (_prev) {
 			n->_prev = _prev;
 			_prev->_next = n;
@@ -125,7 +126,7 @@ namespace ft {
 	}
 
 	template<typename value_type>
-	void Node<value_type>::insertAfter(Node *n) {
+	void Node<value_type>::pasteAfter(Node *n) {
 		if (_next) {
 			n->_next = _next;
 			_next->_prev = n;
@@ -135,7 +136,7 @@ namespace ft {
 	}
 
 	template<typename value_type>
-	void Node<value_type>::disconnect(void) {
+	void Node<value_type>::cut(void) {
 		if (_prev)
 			_prev->_next = _next;
 		if (_next)
