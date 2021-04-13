@@ -24,7 +24,15 @@ namespace ft {
 	*************************************/
 	public:
 		explicit Node(value_type const & value);
-		Node(value_type const &val, Node *prev, Node *next= nullptr);
+		Node(value_type const &val, Node *prev, Node *next = nullptr);
+
+	/*************************************
+	**	GETTERS							**
+	*************************************/
+	public:
+		value_type getData() const;
+		Node<value_type> * getNext() const;
+		Node<value_type> * getPrev() const;
 
 	/*************************************
 	**	METHODS							**
@@ -46,9 +54,9 @@ namespace ft {
 		Node<value_type> *	_prev;
 	};
 
-
 //	TODO .ipp file here
 //	 #include <Node.ipp>
+
 
 	/**	COPLIEN FORM					**/
 	template<typename value_type>
@@ -73,6 +81,7 @@ namespace ft {
 		return (*this);
 	}
 
+
 	/**	CONSTRUCTORS					**/
 	template<typename value_type>
 	Node<value_type>::Node(const value_type &value) :
@@ -85,6 +94,24 @@ namespace ft {
 		_data(value),
 		_prev(prev),
 		_next(next) {}
+
+
+	/**	GETTERS							**/
+	template<typename value_type>
+	value_type Node<value_type>::getData() const {
+		return _data;
+	}
+
+	template<typename value_type>
+	Node<value_type> * Node<value_type>::getNext() const {
+		return _next;
+	}
+
+	template<typename value_type>
+	Node<value_type> * Node<value_type>::getPrev() const {
+		return _prev;
+	}
+
 
 	/**	METHODS							**/
 	template<typename value_type>
