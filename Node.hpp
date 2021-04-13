@@ -27,6 +27,17 @@ namespace ft {
 		Node(value_type const &val, Node *prev, Node *next= nullptr);
 
 	/*************************************
+	**	METHODS							**
+	*************************************/
+	public:
+		void insertBefore(Node *n);
+		void insertAfter(Node *n);
+		void disconnect(void);
+		void swap(Node *n);
+		void swapValues(Node *n);
+		void expand(void);
+
+	/*************************************
 	**	FIELDS							**
 	*************************************/
 	private:
@@ -36,7 +47,8 @@ namespace ft {
 	};
 
 
-//	 TODO .ipp file here
+//	TODO .ipp file here
+//	 #include <Node.ipp>
 
 	/**	COPLIEN FORM					**/
 	template<typename value_type>
@@ -74,6 +86,93 @@ namespace ft {
 		_prev(prev),
 		_next(next) {}
 
-}
+	/**	METHODS							**/
+	template<typename value_type>
+	void Node<value_type>::insertBefore(Node *n) {
+		if (_prev) {
+			n->_prev = _prev;
+			_prev->_next = n;
+		}
+		n->_next = this;
+		_prev = n;
+	}
 
-#include <Node.ipp>
+	template<typename value_type>
+	void Node<value_type>::insertAfter(Node *n) {
+		if (_next) {
+			n->_next = _next;
+			_next->_prev = n;
+		}
+		n->_prev = this;
+		_next = n;
+	}
+
+	template<typename value_type>
+	void Node<value_type>::disconnect(void) {
+		if (_prev)
+			_prev->_next = _next;
+		if (_next)
+			_next->_prev = _prev;
+	}
+
+	template<typename value_type>
+	void Node<value_type>::swap(Node *n) {
+		if (_prev == n) {
+			if (n->_prev)
+				n->_prev->_next = this;
+			_prev = n->_prev;
+			n->_prev = this;
+			if (_next)
+				_next->_prev = n;
+			n->_next = _next;
+			_next = n;
+		}
+
+		else if (_next == n) {
+			if (_prev)
+				_prev->_next = n;
+			n->_prev = _prev;
+			_prev = n;
+			if (n->_next)
+				n->_next->_prev = this;
+			_next = n->_next;
+			n->_next = this;
+		}
+
+		else {
+			Node<value_type> *	next = _next;
+			Node<value_type> *	prev = _prev;
+
+			if (_prev)
+				_prev->_next = n;
+			if (_next)
+				_next->_prev = n;
+			_prev = n->_prev;
+			_next = n->_next;
+			if (n->_prev)
+				n->_prev->_next = this;
+			if (n->_next)
+				n->_next->_prev = this;
+			n->_prev = prev;
+			n->_next = next;
+		}
+	}
+
+	template<typename value_type>
+	void Node<value_type>::expand() {
+		Node<value_type> *tmp;
+
+		tmp = _prev;
+		_prev = _next;
+		_next = tmp;
+	}
+
+	template<typename value_type>
+	void Node<value_type>::swapValues(Node *n) {
+		value_type tmp;
+
+		std::memmove(static_cast<void *>(&tmp), static_cast<void *>(&n->_data), 1);
+		std::memmove(static_cast<void *>(&n->_data), static_cast<void *>(&_data), 1);
+		std::memmove(static_cast<void *>(&_data), static_cast<void *>(&tmp), 1);
+	}
+}
