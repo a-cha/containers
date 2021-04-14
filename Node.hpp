@@ -43,7 +43,7 @@ namespace ft {
 		void cut(void);
 		void swap(Node *n);
 		void swapValues(Node *n);
-		void expand(void);
+		void reverse(void);
 
 	/*************************************
 	**	FIELDS							**
@@ -141,6 +141,7 @@ namespace ft {
 			_prev->_next = _next;
 		if (_next)
 			_next->_prev = _prev;
+		delete this;
 	}
 
 	template<typename value_type>
@@ -187,7 +188,7 @@ namespace ft {
 	}
 
 	template<typename value_type>
-	void Node<value_type>::expand() {
+	void Node<value_type>::reverse() {
 		Node<value_type> *tmp;
 
 		tmp = _prev;
