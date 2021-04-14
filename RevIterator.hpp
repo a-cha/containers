@@ -52,6 +52,8 @@ namespace ft
 		const_point		operator->() const;
 	};
 
+//	TODO .ipp file here
+//	 #include <RevIterator.ipp>
 
 	/**	COPLIEN FORM					**/
 	#pragma region coplien
