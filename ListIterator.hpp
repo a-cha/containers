@@ -37,12 +37,31 @@ namespace ft {
 	**	GETTERS							**
 	*************************************/
 	public:
-		const node_type *getPoint() const;
+		node_type *getPoint() const;
+//		TODO replace it to getPoint
+		node_type * as_node(void) const;
 
 	/*************************************
 	**	OPERATORS						**
 	*************************************/
 	public:
+		ListIterator &		operator++();
+		ListIterator &		operator--();
+		value_type *		operator->();
+		value_type const *	operator->();
+		value_type &		operator*();
+		value_type const &	operator*();
+		ListIterator		operator+(int n) const;
+		ListIterator		operator-(int n) const;
+		void				operator+=(int n);
+		void				operator-=(int n);
+
+		bool				operator==(ListIterator const &other) const;
+		bool				operator!=(ListIterator const &other) const;
+		bool				operator>(ListIterator const &other) const;
+		bool				operator<(ListIterator const &other) const;
+		bool				operator>=(ListIterator const &other) const;
+		bool				operator<=(ListIterator const &other) const;
 
 
 	/*************************************
@@ -51,6 +70,8 @@ namespace ft {
 	private:
 		node_type * _point;
 
+//	TODO .ipp file here
+//	 #include <ListIterator.ipp>
 
 	/**	COPLIEN FORM					**/
 	template<typename T, typename T1>
@@ -77,95 +98,124 @@ namespace ft {
 
 	/**	GETTERS							**/
 	template<typename T, typename T1>
-	const node_type * ListIterator::getPoint() const {
-		return _point;
+	node_type * ListIterator::getPoint() const {
+		return poin;
 	}
 
-
+//	todo do i need this strange method?
 	node_type * &ptr(void) {
-		return (this->_point);
+		return this->_point;
 	}
 
-	node_type * as_node(void) const {
-		return (this->_point);
-	}
 
 
 	/**	OPERATORS						**/
-
-		value_type & operator*() {
-			return (this->_point->value());
-		}
-		const_value_type & operator*() const {
-			return (this->_point->value());
-		}
-		value_type * operator->() {
-			return (&this->_point->value());
-		}
-		value_type const * operator->() const {
-			return (&this->_point->value());
-		}
-
-		ListIterator &operator++() {
+		template<typename T, typename T1>
+		ListIterator &ListIterator::operator++() {
 			this->_point = this->_point->next();
-			return (*this);
-		}
-		ListIterator operator++(int) {
-			ListIterator tmp(*this);
-			this->_point = this->_point->next();
-			return (tmp);
-		}
-		ListIterator &operator--() {
-			this->_point = this->_point->previous();
-			return (*this);
-		}
-		ListIterator operator--(int) {
-			ListIterator tmp(*this);
-			this->_point = this->_point->previous();
-			return (tmp);
+			return *this;
 		}
 
-		ListIterator &operator+=(int value) {
-			if (value > 0) {
-				for (int i = 0; i < value; i++)
-					this->_point = this->_point->next();
-			} else {
-				for (int i = value; i > 0; i--)
-					this->_point = this->_point->previous();
-			}
-		}
-		ListIterator operator+(int value) const {
-			ListIterator tmp(*this);
-			return (tmp += value);
-		}
-		ListIterator &operator-=(int value) {
-			operator+=(-value);
-			return (*this);
-		}
-		ListIterator operator-(int value) const {
-			ListIterator tmp(*this);
-			return (tmp -= value);
+		template<typename T, typename T1>
+		ListIterator &ListIterator::operator--() {
+			this->_point = this->_point->previous();
+			return *this;
 		}
 
-		bool operator==(ListIterator const &other) const {
-			return (this->_point == other._point);
+		template<typename T, typename T1>
+		value_type * ListIterator::operator->() {
+			return &this->_point->_data();
 		}
-		bool operator!=(ListIterator const &other) const {
-			return (this->_point != other._point);
+
+		template<typename T, typename T1>
+		value_type const * ListIterator::operator->() {
+			return &this->_point->_data();
 		}
-		bool operator<(ListIterator const &other) const {
-			return (this->_point < other._point);
+
+		template<typename T, typename T1>
+		value_type &ListIterator::operator*() {
+			return this->_point->_data();
 		}
-		bool operator<=(ListIterator const &other) const {
-			return (this->_point <= other._point);
+
+		template<typename T, typename T1>
+		value_type const &ListIterator::operator*() {
+			return this->_point->_data();
 		}
-		bool operator>(ListIterator const &other) const {
-			return (this->_point > other._point);
+
+		template<typename T, typename T1>
+		ListIterator ListIterator::operator+(int n) const {
+			ListIterator tmp;
+
+			tmp = *this;
+			return tmp += n;
 		}
-		bool operator>=(ListIterator const &other) const {
-			return (this->_point >= other._point);
+
+		template<typename T, typename T1>
+		void ListIterator::operator+=(int n) {
+			for (int i = 0; i < n; i++)
+				this->_point = this->_point->next();
 		}
+
+		template<typename T, typename T1>
+		ListIterator ListIterator::operator-(int n) const {
+			ListIterator tmp;
+
+			tmp = *this;
+			return tmp -= n;
+		}
+
+		template<typename T, typename T1>
+		void ListIterator::operator-=(int n) {
+			for (int i = 0; i > n; i--)
+				this->_point = this->_point->previous();
+		}
+
+		template<typename T, typename T1>
+		bool ListIterator::operator==(const ListIterator &other) const {
+			return this->_point == other._point;
+		}
+
+		template<typename T, typename T1>
+		bool ListIterator::operator!=(const ListIterator &other) const {
+			return this->_point == other._point;
+		}
+
+		template<typename T, typename T1>
+		bool ListIterator::operator>(const ListIterator &other) const {
+			return this->_point > other._point;
+		}
+
+		template<typename T, typename T1>
+		bool ListIterator::operator<(const ListIterator &other) const {
+			return this->_point < other._point;
+		}
+
+		template<typename T, typename T1>
+		bool ListIterator::operator>=(const ListIterator &other) const {
+			return this->_point >= other._point;
+		}
+
+		template<typename T, typename T1>
+		bool ListIterator::operator<=(const ListIterator &other) const {
+			return this->_point <= other._point;
+		}
+
+
+//		todo strange method
+//		ListIterator operator++(int) {
+//			ListIterator tmp(*this);
+//			this->_point = this->_point->next();
+//			return tmp;
+//		}
+
+//		todo strange method
+//		ListIterator operator--(int) {
+//			ListIterator tmp(*this);
+//			this->_point = this->_point->previous();
+//			return tmp;
+//		}
 
 	};
+
 
 }
