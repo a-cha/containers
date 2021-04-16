@@ -7,6 +7,8 @@
 #include "Node.hpp"
 
 /**	COPLIEN FORM					**/
+#pragma region coplien
+
 template<typename value_type>
 Node<value_type>::Node() :
 		_data(),
@@ -28,9 +30,11 @@ Node<value_type> & Node<value_type>::operator=(const Node &other) {
 	}
 	return (*this);
 }
-
+#pragma endregion
 
 /**	CONSTRUCTORS					**/
+#pragma region constructors
+
 template<typename value_type>
 Node<value_type>::Node(const value_type &val) :
 		_data(val),
@@ -42,10 +46,12 @@ Node<value_type>::Node(value_type const &val, Node *prev, Node *next) :
 		_data(val),
 		_prev(prev),
 		_next(next) {}
+#pragma endregion
 
-
-//	TODO have I need more getters?
+//  TODO have I need more getters?
 /**	GETTERS							**/
+#pragma region getters
+
 template<typename value_type>
 value_type Node<value_type>::getData() const {
 	return _data;
@@ -60,9 +66,11 @@ template<typename value_type>
 Node<value_type> * Node<value_type>::getPrev() const {
 	return _prev;
 }
-
+#pragma endregion
 
 /**	METHODS							**/
+#pragma region methods
+
 template<typename value_type>
 void Node<value_type>::pasteBefore(Node *n) {
 	if (_prev) {
@@ -152,3 +160,4 @@ void Node<value_type>::swapValues(Node *n) {
 	std::memmove(static_cast<void *>(&n->_data), static_cast<void *>(&_data), 1);
 	std::memmove(static_cast<void *>(&_data), static_cast<void *>(&tmp), 1);
 }
+#pragma endregion
