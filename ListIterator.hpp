@@ -22,7 +22,7 @@ namespace ft {
 		typedef value_type const &									const_ref;
 		typedef value_type *										pointer;
 		typedef value_type const *									const_point;
-		typedef Node<value_type>									node_type;
+		typedef T1													node_type;
 		typedef node_type *											node_point;
 		typedef ListIterator<value_type, node_type>					iterator;
 		typedef ListIterator<value_type const, node_type const>		const_iterator;

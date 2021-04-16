@@ -43,7 +43,6 @@ namespace ft
 		pointer			operator->();
 		const_point		operator->() const;
 	};
-
 #include "RevIterator.ipp"
-
 }
+

@@ -27,7 +27,7 @@ namespace ft {
 		typedef node_type *											node_point;
 		typedef ListIterator<value_type, node_type>					iterator;
 		typedef ListIterator<value_type const, node_type const>		const_iterator;
-		typedef RevIterator<iterator>								rev_iterator;
+		typedef RevIterator<iterator>								reverse_iterator;
 		typedef RevIterator<const_iterator>							const_rev_iterator;
 		typedef ptrdiff_t											difference_type;
 		typedef size_t												size_type;
@@ -60,9 +60,9 @@ namespace ft {
 		const_iterator		begin() const;
 		iterator			end();
 		const_iterator		end() const;
-		rev_iterator		rbegin();
+		reverse_iterator		rbegin();
 		const_rev_iterator	rbegin() const;
-		rev_iterator		rend();
+		reverse_iterator		rend();
 		const_rev_iterator	rend() const;
 
 		/**	Capacity					*/
@@ -87,7 +87,7 @@ namespace ft {
 		iterator			insert(iterator position, const_ref val);
 		void				insert(iterator position, size_type size, const_ref val);
 		void				insert(iterator position, iterator first, List::iterator last);
-		iterator			erase(iterator position);
+		iterator			erase(iterator pos);
 		iterator			erase(iterator first, iterator last);
 		void				swap(List &other);
 		void				resize(size_type n, value_type val=value_type());
@@ -123,7 +123,6 @@ namespace ft {
 		void make_bounds(void);
 		void reset_bounds(void);
 	};
+}
 
 #include "List.ipp"
-
-}
