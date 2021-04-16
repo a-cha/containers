@@ -64,7 +64,7 @@ I &RevIterator<I>::operator--() {
 }
 
 template<typename I>
-typename RevIterator<I>::reference RevIterator<I>::operator*()  {
+typename RevIterator<I>::ref RevIterator<I>::operator*()  {
 	I tmp;
 
 	tmp = *this;

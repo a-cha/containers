@@ -17,7 +17,7 @@ namespace ft
 	*************************************/
 	public:
 		using typename I::value_type;
-		using typename I::reference;
+		using typename I::ref;
 		using typename I::const_ref;
 		using typename I::pointer;
 		using typename I::const_point;
@@ -46,7 +46,7 @@ namespace ft
 		I &				operator++();
 		RevIterator 	operator--(int);
 		I &				operator--();
-		reference		operator*();
+		ref				operator*();
 		const_ref		operator*() const;
 		pointer			operator->();
 		const_point		operator->() const;
