@@ -37,8 +37,6 @@ namespace ft {
 	*************************************/
 	public:
 		node_type *getPoint() const;
-//		TODO replace it to getPoint
-		node_type * as_node(void) const;
 
 //	todo do i need this strange method?
 		node_type * &ptr(void) {
