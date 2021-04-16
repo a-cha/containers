@@ -6,28 +6,12 @@
 
 #include "RevIterator.hpp"
 
-/**	COPLIEN FORM					**/
-#pragma region coplien
+/**	CONSTRUCTORS					**/
+#pragma region constructors
 
 template<typename I>
 RevIterator<I>::RevIterator() :
 		I() {}
-
-template<typename I>
-RevIterator<I>::RevIterator(RevIterator const &other) :
-		I(other) {}
-
-template<typename I>
-RevIterator<I> & RevIterator<I>::operator=(const RevIterator &other)  {
-	if (this != other)
-		this->p = other.p;
-	return *this;
-}
-
-#pragma endregion
-
-/**	CONSTRUCTORS					**/
-#pragma region constructors
 
 template<typename I>
 RevIterator<I>::RevIterator(const I &other) :

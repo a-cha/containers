@@ -24,18 +24,10 @@ namespace ft
 		using typename I::difference_type;
 
 	/*************************************
-	**	COPLIEN FORM					**
-	*************************************/
-	public:
-		RevIterator();
-		RevIterator(RevIterator const &other);
-		RevIterator &operator=(RevIterator const &other);
-		virtual ~RevIterator() {}
-
-	/*************************************
 	**	CONSTRUCTORS					**
 	*************************************/
 	public:
+		RevIterator();
 		RevIterator(I const & other);
 
 	/*************************************
