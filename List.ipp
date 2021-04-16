@@ -379,7 +379,7 @@ template<typename T, class Alloc>
 void List<T, Alloc>::merge(List &x) {
 	if (&x == this)
 		return ;
-	this->merge(x, &ft::less_than<value_type>);
+	this->merge(x, &ft::lower_than<value_type>);
 }
 
 template<typename T, class Alloc>
@@ -417,7 +417,7 @@ template<typename T, class Alloc>
 void List<T, Alloc>::sort() {
 	if (this->_size <= 1)
 		return ;
-	this->sort(&ft::less_than<value_type>);
+	this->sort(&ft::lower_than<value_type>);
 }
 
 template<typename T, class Alloc>

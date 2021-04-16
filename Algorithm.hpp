@@ -43,12 +43,12 @@ namespace ft
 	}
 
 	template<class T>
-	bool less_than(T const &a, T const &b) {
+	bool lower_than(T const &a, T const &b) {
 		return (a < b);
 	}
 
 	template<class T>
-	bool more_than(T const &a, T const &b) {
+	bool greater_than(T const &a, T const &b) {
 		return (a > b);
 	}
 
