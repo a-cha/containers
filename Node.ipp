@@ -53,7 +53,12 @@ Node<value_type>::Node(value_type const &val, Node *prev, Node *next) :
 #pragma region Getters
 
 template<typename value_type>
-value_type Node<value_type>::getData() const {
+value_type & Node<value_type>::getData() {
+	return _data;
+}
+
+template<typename value_type>
+const value_type & Node<value_type>::getData() const {
 	return _data;
 }
 
@@ -160,4 +165,15 @@ void Node<value_type>::swapValues(Node *n) {
 	std::memmove(static_cast<void *>(&n->_data), static_cast<void *>(&_data), 1);
 	std::memmove(static_cast<void *>(&_data), static_cast<void *>(&tmp), 1);
 }
+
 #pragma endregion
+
+template<typename value_type>
+void Node<value_type>::setNext(Node <value_type> *next) {
+	_next = next;
+}
+
+template<typename value_type>
+void Node<value_type>::setPrev(Node <value_type> *prev) {
+	_prev = prev;
+}

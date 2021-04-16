@@ -30,9 +30,17 @@ namespace ft {
 	**	GETTERS							**
 	*************************************/
 	public:
-		value_type getData() const;
+		value_type & getData();
+		const value_type & getData() const;
 		Node<value_type> * getNext() const;
 		Node<value_type> * getPrev() const;
+
+	/*************************************
+	**	SETTERS							**
+	*************************************/
+	public:
+		void setPrev(Node<value_type> *prev);
+		void setNext(Node<value_type> *next);
 
 	/*************************************
 	**	METHODS							**
