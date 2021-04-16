@@ -52,6 +52,7 @@ namespace ft {
 		void swap(Node *n);
 		void swapValues(Node *n);
 		void reverse(void);
+		void detach(void);
 
 	/*************************************
 	**	FIELDS							**

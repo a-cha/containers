@@ -201,7 +201,7 @@ namespace ft {
 			this->_endNode->setPrev(0);
 		} else if (this->_size >= 1) {
 			node_point tmp = this->_beginNode->getNext();
-			this->_beginNode->cut();
+			this->_beginNode->detach();
 			delete this->_beginNode;
 			this->_beginNode = tmp;
 		}
@@ -223,7 +223,7 @@ namespace ft {
 			this->pop_front();
 		else if (this->_size >= 1) {
 			node_point tmp = this->_endNode->getPrev();
-			this->_endNode->getPrev()->cut();
+			this->_endNode->getPrev()->detach();
 			delete tmp;
 			--this->_size;
 		}
@@ -269,8 +269,8 @@ namespace ft {
 			return (this->end());
 		}
 		node_point next = pos.getPoint()->getNext();
-		pos.getPoint()->cut();
-//		delete pos.getPoint();
+		pos.getPoint()->detach();
+		delete pos.getPoint();
 		--this->_size;
 		return (iterator(next));
 	}
@@ -334,7 +334,7 @@ namespace ft {
 			node_point tmp = first++.getPoint();
 			if (tmp == x._beginNode)
 				x._beginNode = tmp->getNext();
-			tmp->cut();
+			tmp->detach();
 			position.getPoint()->pasteBefore(tmp);
 			if (position.getPoint() == this->_beginNode)
 				this->_beginNode = tmp;
@@ -421,7 +421,7 @@ namespace ft {
 			if ((*comp)(*f2, *f1)) {
 				x._beginNode = f2.getPoint()->getNext();
 				--x._size;
-				f2.getPoint()->cut();
+				f2.getPoint()->detach();
 				f1.getPoint()->pasteBefore(f2.getPoint());
 				if (f1 == this->begin())
 					this->_beginNode = this->_beginNode->getPrev();
@@ -471,11 +471,13 @@ namespace ft {
 		if (this->_size <= 1)
 			return;
 		iterator begin = this->begin();
-		iterator end = --this->end();
+		iterator end = this->end();
+		--end;
 
 		size_t limit = this->_size / 2;
 		for (size_t i = 0; i < limit; ++i) {
-			begin++.getPoint()->swap(end.getPoint());
+			begin.getPoint()->swap(end.getPoint());
+			++begin;
 			--end;
 		}
 		while (end.getPoint()->getPrev())

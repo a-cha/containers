@@ -73,6 +73,20 @@ Node<value_type> * Node<value_type>::getPrev() const {
 }
 #pragma endregion
 
+/**	SETTERS							**/
+#pragma region Setters
+
+template<typename value_type>
+void Node<value_type>::setNext(Node <value_type> *next) {
+	_next = next;
+}
+
+template<typename value_type>
+void Node<value_type>::setPrev(Node <value_type> *prev) {
+	_prev = prev;
+}
+#pragma endregion
+
 /**	METHODS							**/
 #pragma region Methods
 
@@ -158,6 +172,14 @@ void Node<value_type>::reverse() {
 }
 
 template<typename value_type>
+void Node<value_type>::detach(void)  {
+	if (this->_prev)
+		this->_prev->_next = this->_next;
+	if (this->_next)
+		this->_next->_prev = this->_prev;
+}
+
+template<typename value_type>
 void Node<value_type>::swapValues(Node *n) {
 	value_type tmp;
 
@@ -167,13 +189,3 @@ void Node<value_type>::swapValues(Node *n) {
 }
 
 #pragma endregion
-
-template<typename value_type>
-void Node<value_type>::setNext(Node <value_type> *next) {
-	_next = next;
-}
-
-template<typename value_type>
-void Node<value_type>::setPrev(Node <value_type> *prev) {
-	_prev = prev;
-}
