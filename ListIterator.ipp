@@ -19,7 +19,7 @@
 
 	template<typename T, typename T1>
 	ListIterator<T, T1> &ListIterator<T, T1>::operator=(const ListIterator &other) {
-		if (this != other)
+		if (this != &other)
 			_point = other._point;
 		return *this;
 	}
@@ -48,24 +48,26 @@
 
 	template<typename T, typename T1>
 	ListIterator<T, T1> &ListIterator<T, T1>::operator++() {
-		this->_point = this->_point->next();
+		this->_point = this->_point->getNext();
 		return *this;
 	}
 
 	template<typename T, typename T1>
 	ListIterator<T, T1> &ListIterator<T, T1>::operator--() {
-		this->_point = this->_point->previous();
+		this->_point = this->_point->getPrev();
 		return *this;
 	}
 
 	template<typename T, typename T1>
-	typename ListIterator<T, T1>::value_type * ListIterator<T, T1>::operator->() {
+	typename ListIterator<T, T1>::pointer ListIterator<T, T1>::operator->() {
 		return &this->_point->_data();
 	}
 
 	template<typename T, typename T1>
-	typename ListIterator<T, T1>::value_type & ListIterator<T, T1>::operator*() {
-		return this->_point->_data();
+	typename ListIterator<T, T1>::ref ListIterator<T, T1>::operator*() {
+		typename ListIterator<T, T1>::ref val = this->_point->getData();
+
+		return val;
 	}
 
 	template<typename T, typename T1>
@@ -127,6 +129,14 @@
 	bool ListIterator<T, T1>::operator<=(const ListIterator &other) const {
 		return this->_point <= other._point;
 	}
+
+template<typename T, typename T1>
+ListIterator<T, T1> ListIterator<T, T1>::operator++(int) {
+		ListIterator tmp(*this);
+		this->_point = this->_point->getNext();
+		return (tmp);
+	}
+
 
 #pragma endregion
 

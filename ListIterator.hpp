@@ -23,7 +23,7 @@ namespace ft {
 		typedef value_type *										pointer;
 		typedef value_type const *									const_point;
 		typedef Node<value_type>									node_type;
-		typedef node_type*											node_point;
+		typedef node_type *											node_point;
 		typedef ListIterator<value_type, node_type>					iterator;
 		typedef ListIterator<value_type const, node_type const>		const_iterator;
 		typedef RevIterator<iterator>								rev_iterator;
@@ -70,13 +70,14 @@ namespace ft {
 		void				operator+=(int n);
 		void				operator-=(int n);
 
+		ListIterator operator++(int);
+
 		bool				operator==(ListIterator const &other) const;
 		bool				operator!=(ListIterator const &other) const;
 		bool				operator>(ListIterator const &other) const;
 		bool				operator<(ListIterator const &other) const;
 		bool				operator>=(ListIterator const &other) const;
 		bool				operator<=(ListIterator const &other) const;
-
 
 	/*************************************
 	**	FIELDS							**
