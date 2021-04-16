@@ -107,7 +107,7 @@
 
 	template<typename T, typename T1>
 	bool ListIterator<T, T1>::operator!=(const ListIterator &other) const {
-		return this->_point == other._point;
+		return this->_point != other._point;
 	}
 
 	template<typename T, typename T1>
