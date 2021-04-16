@@ -22,9 +22,9 @@ namespace ft {
 		typedef value_type &										ref;
 		typedef value_type const &									const_ref;
 		typedef value_type *										pointer;
-		typedef value_type const *									const_pointer;
+		typedef value_type const *									const_point;
 		typedef Node<value_type>									node_type;
-		typedef node_type*											node_pointer;
+		typedef node_type*											node_point;
 		typedef ListIterator<value_type, node_type>					iterator;
 		typedef ListIterator<value_type const, node_type const>		const_iterator;
 		typedef RevIterator<iterator>								rev_iterator;
@@ -116,10 +116,12 @@ namespace ft {
 	**	FIELDS							**
 	*************************************/
 	private:
-		size_type               _size;
-		node_pointer			_beginNode;
-		node_pointer			_endNode;
+		size_type              _size;
+		node_point			_beginNode;
+		node_point			_endNode;
 
+		void make_bounds(void);
+		void reset_bounds(void);
 	};
 
 #include "List.ipp"

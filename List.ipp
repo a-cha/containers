@@ -171,7 +171,7 @@ void List<T, Alloc>::assign(size_type size, const_ref val) {
 
 template<typename T, class Alloc>
 void List<T, Alloc>::push_front(const_ref val) {
-	node_pointer tmp = new node_type(val);
+	node_point tmp = new node_type(val);
 	if (this->_size == 0)
 		this->_endNode->insert_before(tmp);
 	else
@@ -187,7 +187,7 @@ void List<T, Alloc>::pop_front() {
 		this->_beginNode = this->_endNode;
 		this->_endNode->previous() = nullptr;
 	} else if (this->_size >= 1) {
-		node_pointer tmp = this->_beginNode->next();
+		node_point tmp = this->_beginNode->next();
 		this->_beginNode->disconnect();
 		delete this->_beginNode;
 		this->_beginNode = tmp;
@@ -197,7 +197,7 @@ void List<T, Alloc>::pop_front() {
 
 template<typename T, class Alloc>
 void List<T, Alloc>::push_back(const_ref val) {
-	node_pointer tmp = new node_type(val);
+	node_point tmp = new node_type(val);
 	this->_endNode->insert_before(tmp);
 	if (this->_size == 0)
 		this->_beginNode = tmp;
@@ -209,7 +209,7 @@ void List<T, Alloc>::pop_back() {
 	if (this->_size == 1)
 		this->pop_front();
 	else if (this->_size >= 1) {
-		node_pointer tmp = this->_endNode->previous();
+		node_point tmp = this->_endNode->previous();
 		this->_endNode->previous()->disconnect();
 		delete tmp;
 		--this->_size;
@@ -225,7 +225,7 @@ typename List<T, Alloc>::iterator List<T, Alloc>::insert(iterator position, cons
 		this->push_back(val);
 		return (this->end());
 	}
-	node_pointer newNode = new node_type(val);
+	node_point newNode = new node_type(val);
 	position.getPoint()->insert_before(newNode);
 	++this->_size;
 	return (iterator(newNode));
@@ -252,7 +252,7 @@ typename List<T, Alloc>::iterator List<T, Alloc>::erase(iterator position) {
 		this->pop_back();
 		return (this->end());
 	}
-	node_pointer next = position.getPoint()->next();
+	node_point next = position.getPoint()->next();
 	position.getPoint()->disconnect();
 	delete position.getPoint();
 	--this->_size;
@@ -311,7 +311,7 @@ void List<T, Alloc>::splice(iterator position, List &x, iterator it) {
 template<typename T, class Alloc>
 void List<T, Alloc>::splice(iterator position, List &x, iterator first, iterator last) {
 	while (first != last) {
-		node_pointer tmp = first++.getPoint();
+		node_point tmp = first++.getPoint();
 		if (tmp == x._beginNode)
 			x._beginNode = tmp->next();
 		tmp->disconnect();
@@ -486,6 +486,7 @@ bool operator==(List<T> const &l, List<T> const &r) {
 
 template<typename T>
 bool operator!=(List<T> const &l, List<T> const &r) {
+
 	return (!(l == r));
 }
 
@@ -513,4 +514,22 @@ template<typename T>
 void swap(List<T> &x, List<T> &y) {
 	x.swap(y);
 }
+#pragma endregion
+
+/**	UTILS							**/
+#pragma region Utils
+
+template<typename T, class Alloc>
+void List<T, Alloc>::make_bounds(void) {
+	this->m_end = new Node<value_type>();
+	this->reset_bounds();
+}
+
+template<typename T, class Alloc>
+void List<T, Alloc>::reset_bounds(void) {
+	this->m_begin = this->m_end;
+	this->m_end->previous() = nullptr;
+	this->m_end->next() = nullptr;
+}
+
 #pragma endregion
