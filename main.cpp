@@ -4,9 +4,10 @@
 
 #include <iostream>
 #include <list>
+#include "list_test.hpp"
+#include "List.hpp"
 
 int main() {
-	std::cout << "Hello, World!" << std::endl;
-	std::list<std::string>::pointer a = new	std::string("wer");
+	test_List<ft::List<double>, double>();
 	return 0;
 }
