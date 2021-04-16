@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <Node.hpp>
+#include "Node.hpp"
 
 namespace ft
 {
@@ -42,9 +42,9 @@ namespace ft
 	**	OPERATORS						**
 	*************************************/
 	public:
-		RevIterator		operator++();
+		RevIterator		operator++(int);
 		I &				operator++();
-		RevIterator		operator--();
+		RevIterator 	operator--(int);
 		I &				operator--();
 		reference		operator*();
 		const_ref		operator*() const;
@@ -52,92 +52,6 @@ namespace ft
 		const_point		operator->() const;
 	};
 
-//	TODO .ipp file here
-//	 #include <RevIterator.ipp>
-
-	/**	COPLIEN FORM					**/
-	#pragma region coplien
-
-	template<typename I>
-	RevIterator<I>::RevIterator() :
-		I() {}
-
-	template<typename I>
-	RevIterator<I>::RevIterator(RevIterator const &other) :
-		I(other) {}
-
-	template<typename I>
-	RevIterator & RevIterator<I>::operator=(const RevIterator &other)  {
-		if (this != other)
-			this->p = other.p;
-		return *this;
-	}
-
-	#pragma endregion
-
-	/**	CONSTRUCTORS					**/
-	template<typename I>
-	RevIterator<I>::RevIterator(const I &other) :
-		I(other) {}
-
-
-	/**	OPERATORS						**/
-	template<typename I>
-	RevIterator RevIterator<I>::operator++()  {
-		RevIterator tmp;
-
-		tmp = *this;
-		return ++tmp;
-	}
-
-	template<typename I>
-	I & RevIterator<I>::operator++() {
-		return this->I::operator--();
-	}
-
-	template<typename I>
-	RevIterator RevIterator<I>::operator--() {
-		RevIterator tmp;
-
-		tmp = *this;
-		return --tmp;
-	}
-
-	template<typename I>
-	I & RevIterator<I>::operator--() {
-		return this->I::operator++();
-	}
-
-	template<typename I>
-	reference RevIterator<I>::operator*()  {
-		I tmp;
-
-		tmp = *this;
-		return *--tmp;
-	}
-
-	template<typename I>
-	const_ref RevIterator<I>::operator*() const  {
-		I tmp;
-
-		tmp = *this;
-		return *--tmp;
-	}
-
-	template<typename I>
-	pointer RevIterator<I>::operator->()  {
-		I tmp;
-
-		tmp = *this;
-		return &*--tmp;
-	}
-
-	template<typename I>
-	const_point RevIterator<I>::operator->() const  {
-		I tmp;
-
-		tmp = *this;
-		return &*--tmp;
-	}
+#include "RevIterator.ipp"
 
 }
