@@ -57,5 +57,3 @@ namespace ft {
 #include "Node.ipp"
 
 }
-
-}

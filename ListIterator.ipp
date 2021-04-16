@@ -7,7 +7,7 @@
 #include "ListIterator.hpp"
 
 /**	COPLIEN FORM					**/
-#pragma region coplien
+#pragma region Coplien
 
 	template<typename T, typename T1>
 	ListIterator<T, T1>::ListIterator() :
@@ -27,7 +27,7 @@
 #pragma endregion
 
 /**	CONSTRUCTORS					**/
-#pragma region constructors
+#pragma region Constructors
 
 	template<typename T, typename T1>
 	ListIterator<T, T1>::ListIterator(ListIterator<T, T1>::node_type *p) :
@@ -35,7 +35,7 @@
 #pragma endregion
 
 /**	GETTERS							**/
-#pragma region getters
+#pragma region Getters
 
 	template<typename T, typename T1>
 	typename ListIterator<T, T1>::node_type *ListIterator<T, T1>::getPoint() const {
@@ -44,7 +44,7 @@
 #pragma endregion
 
 /**	OPERATORS						**/
-#pragma region operators
+#pragma region Operators
 
 	template<typename T, typename T1>
 	ListIterator<T, T1> &ListIterator<T, T1>::operator++() {

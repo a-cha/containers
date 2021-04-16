@@ -7,7 +7,7 @@
 #include "Node.hpp"
 
 /**	COPLIEN FORM					**/
-#pragma region coplien
+#pragma region Coplien
 
 template<typename value_type>
 Node<value_type>::Node() :
@@ -33,7 +33,7 @@ Node<value_type> & Node<value_type>::operator=(const Node &other) {
 #pragma endregion
 
 /**	CONSTRUCTORS					**/
-#pragma region constructors
+#pragma region Constructors
 
 template<typename value_type>
 Node<value_type>::Node(const value_type &val) :
@@ -50,7 +50,7 @@ Node<value_type>::Node(value_type const &val, Node *prev, Node *next) :
 
 //  TODO have I need more getters?
 /**	GETTERS							**/
-#pragma region getters
+#pragma region Getters
 
 template<typename value_type>
 value_type Node<value_type>::getData() const {
@@ -69,7 +69,7 @@ Node<value_type> * Node<value_type>::getPrev() const {
 #pragma endregion
 
 /**	METHODS							**/
-#pragma region methods
+#pragma region Methods
 
 template<typename value_type>
 void Node<value_type>::pasteBefore(Node *n) {
