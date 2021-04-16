@@ -53,6 +53,9 @@ namespace ft {
 		Node<value_type> *	_next;
 		Node<value_type> *	_prev;
 	};
-}
 
 #include "Node.ipp"
+
+}
+
+}
