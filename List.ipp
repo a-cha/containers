@@ -126,24 +126,29 @@ typename List<T, Alloc>::size_type List<T, Alloc>::max_size() const {
 #pragma endregion
 
 #pragma region Element access
-template<typename T, class Alloc>
-typename List<T, Alloc>::ref List<T, Alloc>::front() {
-	return (this->_beginNode->value());
-}
+//template<typename T, class Alloc>
+//typename List<T, Alloc>::ref List<T, Alloc>::front() {
+//	return (this->_beginNode->getData());
+//}
 
 template<typename T, class Alloc>
 typename List<T, Alloc>::const_ref List<T, Alloc>::front() const {
-	return (this->_beginNode->value());
+	typename List<T, Alloc>::const_ref val();
+
+	val = this->_beginNode->getData();
+	return val;
 }
 
 template<typename T, class Alloc>
 typename List<T, Alloc>::ref List<T, Alloc>::back() {
-	return (this->_endNode->previous()->value());
+	typename List<T, Alloc>::ref val = this->_endNode->getPrev()->getData();
+
+	return val;
 }
 
 template<typename T, class Alloc>
 typename List<T, Alloc>::const_ref List<T, Alloc>::back() const {
-	return (this->_endNode->previous()->value());
+	return (this->_endNode->_prev()->_data());
 }
 #pragma endregion
 
@@ -173,9 +178,9 @@ template<typename T, class Alloc>
 void List<T, Alloc>::push_front(const_ref val) {
 	node_point tmp = new node_type(val);
 	if (this->_size == 0)
-		this->_endNode->insert_before(tmp);
+		this->_endNode->pasteBefore(tmp);
 	else
-		this->_beginNode->insert_before(tmp);
+		this->_beginNode->pasteBefore(tmp);
 	this->_beginNode = tmp;
 	++this->_size;
 }
@@ -185,10 +190,10 @@ void List<T, Alloc>::pop_front() {
 	if (this->_size == 1) {
 		delete this->_beginNode;
 		this->_beginNode = this->_endNode;
-		this->_endNode->previous() = nullptr;
+		this->_endNode->setPrev(0);
 	} else if (this->_size >= 1) {
-		node_point tmp = this->_beginNode->next();
-		this->_beginNode->disconnect();
+		node_point tmp = this->_beginNode->getNext();
+		this->_beginNode->cut();
 		delete this->_beginNode;
 		this->_beginNode = tmp;
 	}
@@ -198,7 +203,7 @@ void List<T, Alloc>::pop_front() {
 template<typename T, class Alloc>
 void List<T, Alloc>::push_back(const_ref val) {
 	node_point tmp = new node_type(val);
-	this->_endNode->insert_before(tmp);
+	this->_endNode->pasteBefore(tmp);
 	if (this->_size == 0)
 		this->_beginNode = tmp;
 	++this->_size;
@@ -209,8 +214,8 @@ void List<T, Alloc>::pop_back() {
 	if (this->_size == 1)
 		this->pop_front();
 	else if (this->_size >= 1) {
-		node_point tmp = this->_endNode->previous();
-		this->_endNode->previous()->disconnect();
+		node_point tmp = this->_endNode->getPrev();
+		this->_endNode->getPrev()->cut();
 		delete tmp;
 		--this->_size;
 	}
@@ -226,7 +231,7 @@ typename List<T, Alloc>::iterator List<T, Alloc>::insert(iterator position, cons
 		return (this->end());
 	}
 	node_point newNode = new node_type(val);
-	position.getPoint()->insert_before(newNode);
+	position.getPoint()->pasteBefore(newNode);
 	++this->_size;
 	return (iterator(newNode));
 }
@@ -252,8 +257,8 @@ typename List<T, Alloc>::iterator List<T, Alloc>::erase(iterator position) {
 		this->pop_back();
 		return (this->end());
 	}
-	node_point next = position.getPoint()->next();
-	position.getPoint()->disconnect();
+	node_point next = position.getPoint()->getNext();
+	position.getPoint()->cut();
 	delete position.getPoint();
 	--this->_size;
 	return (iterator(next));
@@ -313,9 +318,9 @@ void List<T, Alloc>::splice(iterator position, List &x, iterator first, iterator
 	while (first != last) {
 		node_point tmp = first++.getPoint();
 		if (tmp == x._beginNode)
-			x._beginNode = tmp->next();
-		tmp->disconnect();
-		position.getPoint()->insert_before(tmp);
+			x._beginNode = tmp->getNext();
+		tmp->cut();
+		position.getPoint()->pasteBefore(tmp);
 		if (position.getPoint() == this->_beginNode)
 			this->_beginNode = tmp;
 		++this->_size;
@@ -361,17 +366,17 @@ void List<T, Alloc>::unique() {
 template<typename T, class Alloc>
 template<typename BinaryPredicate>
 void List<T, Alloc>::unique(BinaryPredicate binary_pred) {
-	iterator previous = this->begin();
-	iterator next = previous;
+	iterator _prev = this->begin();
+	iterator next = _prev;
 	iterator last = this->end();
 
 	while (next != last) {
 		++next;
-		if ((*binary_pred)(*previous, *next)) {
+		if ((*binary_pred)(*_prev, *next)) {
 			this->erase(next);
-			next = previous;
+			next = _prev;
 		} else
-			previous = next;
+			_prev = next;
 	}
 }
 
@@ -399,12 +404,12 @@ void List<T, Alloc>::merge(List &x, Compare comp) {
 
 	while (f1 != e1 && f2 != e2) {
 		if ((*comp)(*f2, *f1)) {
-			x._beginNode = f2.getPoint()->next();
+			x._beginNode = f2.getPoint()->getNext();
 			--x._size;
-			f2.getPoint()->disconnect();
-			f1.getPoint()->insert_before(f2.getPoint());
+			f2.getPoint()->cut();
+			f1.getPoint()->pasteBefore(f2.getPoint());
 			if (f1 == this->begin())
-				this->_beginNode = this->_beginNode->previous();
+				this->_beginNode = this->_beginNode->getPrev();
 			++this->_size;
 			f2 = x.begin();
 		} else
@@ -455,9 +460,10 @@ void List<T, Alloc>::reverse() {
 
 	size_t limit = this->_size / 2;
 	for (size_t i = 0; i < limit; ++i) {
-		begin++.getPoint()->swap(end--.getPoint());
+		begin++.getPoint()->swap(end.getPoint());
+		--end;
 	}
-	while (end.getPoint()->previous())
+	while (end.getPoint()->getPrev())
 		--end;
 	this->_beginNode = end.ptr();
 }
@@ -521,15 +527,15 @@ void swap(List<T> &x, List<T> &y) {
 
 template<typename T, class Alloc>
 void List<T, Alloc>::make_bounds(void) {
-	this->m_end = new Node<value_type>();
+	this->_endNode = new Node<value_type>();
 	this->reset_bounds();
 }
 
 template<typename T, class Alloc>
 void List<T, Alloc>::reset_bounds(void) {
-	this->m_begin = this->m_end;
-	this->m_end->previous() = nullptr;
-	this->m_end->next() = nullptr;
+	this->_beginNode = this->_endNode;
+	this->_endNode->setPrev(0);
+	this->_endNode->setNext(0);
 }
 
 #pragma endregion
