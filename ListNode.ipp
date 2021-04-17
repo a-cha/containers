@@ -4,25 +4,25 @@
 
 #pragma once
 
-#include "Node.hpp"
+#include "ListNode.hpp"
 
 /**	COPLIEN FORM					**/
 #pragma region Coplien
 
 template<typename value_type>
-Node<value_type>::Node() :
+ListNode<value_type>::ListNode() :
 		_data(),
 		_next(),
 		_prev() {}
 
 template<typename value_type>
-Node<value_type>::Node(const Node &other) :
+ListNode<value_type>::ListNode(const ListNode &other) :
 		_data(other._data),
 		_next(other._next),
 		_prev(other._prev) {}
 
 template<typename value_type>
-Node<value_type> & Node<value_type>::operator=(const Node &other) {
+ListNode<value_type> & ListNode<value_type>::operator=(const ListNode &other) {
 	if (this != other) {
 		_data = other._data;
 		_next = other._next;
@@ -36,13 +36,13 @@ Node<value_type> & Node<value_type>::operator=(const Node &other) {
 #pragma region Constructors
 
 template<typename value_type>
-Node<value_type>::Node(const value_type &val) :
+ListNode<value_type>::ListNode(const value_type &val) :
 		_data(val),
 		_next(),
 		_prev() {}
 
 template<typename value_type>
-Node<value_type>::Node(value_type const &val, Node *prev, Node *next) :
+ListNode<value_type>::ListNode(value_type const &val, ListNode *prev, ListNode *next) :
 		_data(val),
 		_prev(prev),
 		_next(next) {}
@@ -52,22 +52,22 @@ Node<value_type>::Node(value_type const &val, Node *prev, Node *next) :
 #pragma region Getters
 
 template<typename value_type>
-value_type & Node<value_type>::getData() {
+value_type & ListNode<value_type>::getData() {
 	return _data;
 }
 
 template<typename value_type>
-const value_type & Node<value_type>::getData() const {
+const value_type & ListNode<value_type>::getData() const {
 	return _data;
 }
 
 template<typename value_type>
-Node<value_type> * Node<value_type>::getNext() const {
+ListNode<value_type> * ListNode<value_type>::getNext() const {
 	return _next;
 }
 
 template<typename value_type>
-Node<value_type> * Node<value_type>::getPrev() const {
+ListNode<value_type> * ListNode<value_type>::getPrev() const {
 	return _prev;
 }
 #pragma endregion
@@ -76,12 +76,12 @@ Node<value_type> * Node<value_type>::getPrev() const {
 #pragma region Setters
 
 template<typename value_type>
-void Node<value_type>::setNext(Node <value_type> *next) {
+void ListNode<value_type>::setNext(ListNode <value_type> *next) {
 	_next = next;
 }
 
 template<typename value_type>
-void Node<value_type>::setPrev(Node <value_type> *prev) {
+void ListNode<value_type>::setPrev(ListNode <value_type> *prev) {
 	_prev = prev;
 }
 #pragma endregion
@@ -90,7 +90,7 @@ void Node<value_type>::setPrev(Node <value_type> *prev) {
 #pragma region Methods
 
 template<typename value_type>
-void Node<value_type>::pasteBefore(Node *n) {
+void ListNode<value_type>::pasteBefore(ListNode *n) {
 	if (_prev) {
 		n->_prev = _prev;
 		_prev->_next = n;
@@ -100,7 +100,7 @@ void Node<value_type>::pasteBefore(Node *n) {
 }
 
 template<typename value_type>
-void Node<value_type>::pasteAfter(Node *n) {
+void ListNode<value_type>::pasteAfter(ListNode *n) {
 	if (_next) {
 		n->_next = _next;
 		_next->_prev = n;
@@ -110,7 +110,7 @@ void Node<value_type>::pasteAfter(Node *n) {
 }
 
 template<typename value_type>
-void Node<value_type>::cut(void) {
+void ListNode<value_type>::cut(void) {
 	if (_prev)
 		_prev->_next = _next;
 	if (_next)
@@ -119,7 +119,7 @@ void Node<value_type>::cut(void) {
 }
 
 template<typename value_type>
-void Node<value_type>::swap(Node *n) {
+void ListNode<value_type>::swap(ListNode *n) {
 	if (_prev == n) {
 		if (n->_prev)
 			n->_prev->_next = this;
@@ -143,8 +143,8 @@ void Node<value_type>::swap(Node *n) {
 	}
 
 	else {
-		Node<value_type> *	next = _next;
-		Node<value_type> *	prev = _prev;
+		ListNode<value_type> *	next = _next;
+		ListNode<value_type> *	prev = _prev;
 
 		if (_prev)
 			_prev->_next = n;
@@ -162,8 +162,8 @@ void Node<value_type>::swap(Node *n) {
 }
 
 template<typename value_type>
-void Node<value_type>::reverse() {
-	Node<value_type> *tmp;
+void ListNode<value_type>::reverse() {
+	ListNode<value_type> *tmp;
 
 	tmp = _prev;
 	_prev = _next;
@@ -171,7 +171,7 @@ void Node<value_type>::reverse() {
 }
 
 template<typename value_type>
-void Node<value_type>::detach(void)  {
+void ListNode<value_type>::detach(void)  {
 	if (this->_prev)
 		this->_prev->_next = this->_next;
 	if (this->_next)
@@ -179,7 +179,7 @@ void Node<value_type>::detach(void)  {
 }
 
 template<typename value_type>
-void Node<value_type>::swapValues(Node *n) {
+void ListNode<value_type>::swapValues(ListNode *n) {
 	value_type tmp;
 
 	std::memmove(static_cast<void *>(&tmp), static_cast<void *>(&n->_data), 1);

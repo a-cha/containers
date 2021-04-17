@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "Node.hpp"
+#include "ListNode.hpp"
 #include "ListIterator.hpp"
 #include "RevIterator.hpp"
 
@@ -23,7 +23,7 @@ namespace ft {
 		typedef value_type const &									const_ref;
 		typedef value_type *										pointer;
 		typedef value_type const *									const_point;
-		typedef Node<value_type>									node_type;
+		typedef ListNode<value_type>									node_type;
 		typedef node_type *											node_point;
 		typedef ListIterator<value_type, node_type>					iterator;
 		typedef ListIterator<value_type const, node_type const>		const_iterator;

@@ -544,7 +544,7 @@ namespace ft {
 
 	template<typename T, class Alloc>
 	void List<T, Alloc>::make_bounds() {
-		_endNode = new Node<value_type>();
+		_endNode = new ListNode<value_type>();
 		reset_bounds();
 	}
 

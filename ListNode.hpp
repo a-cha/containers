@@ -8,23 +8,23 @@ namespace ft {
 
 	template <typename value_type>
 
-	class Node {
+	class ListNode {
 
 	/*************************************
 	**	COPLIEN FORM					**
 	*************************************/
 	public:
-		Node();
-		Node(Node const &other);
-		Node &operator=(Node const &other);
-		~Node() {}
+		ListNode();
+		ListNode(ListNode const &other);
+		ListNode &operator=(ListNode const &other);
+		~ListNode() {}
 
 	/*************************************
 	**	CONSTRUCTORS					**
 	*************************************/
 	public:
-		explicit Node(value_type const & val);
-		Node(value_type const &val, Node *prev, Node *next = nullptr);
+		explicit ListNode(value_type const & val);
+		ListNode(value_type const &val, ListNode *prev, ListNode *next = nullptr);
 
 	/*************************************
 	**	GETTERS							**
@@ -32,25 +32,25 @@ namespace ft {
 	public:
 		value_type & getData();
 		const value_type & getData() const;
-		Node<value_type> * getNext() const;
-		Node<value_type> * getPrev() const;
+		ListNode<value_type> * getNext() const;
+		ListNode<value_type> * getPrev() const;
 
 	/*************************************
 	**	SETTERS							**
 	*************************************/
 	public:
-		void setPrev(Node<value_type> *prev);
-		void setNext(Node<value_type> *next);
+		void setPrev(ListNode<value_type> *prev);
+		void setNext(ListNode<value_type> *next);
 
 	/*************************************
 	**	METHODS							**
 	*************************************/
 	public:
-		void pasteBefore(Node *n);
-		void pasteAfter(Node *n);
+		void pasteBefore(ListNode *n);
+		void pasteAfter(ListNode *n);
 		void cut(void);
-		void swap(Node *n);
-		void swapValues(Node *n);
+		void swap(ListNode *n);
+		void swapValues(ListNode *n);
 		void reverse(void);
 		void detach(void);
 
@@ -59,10 +59,10 @@ namespace ft {
 	*************************************/
 	private:
 		value_type			_data;
-		Node<value_type> *	_next;
-		Node<value_type> *	_prev;
+		ListNode<value_type> *	_next;
+		ListNode<value_type> *	_prev;
 	};
 
-#include "Node.ipp"
+#include "ListNode.ipp"
 
 }
