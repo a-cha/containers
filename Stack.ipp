@@ -4,8 +4,6 @@
 
 #pragma once
 
-//namespace ft {
-
 /**	COPLIEN FORM					**/
 #pragma region Coplien
 
@@ -31,22 +29,22 @@
 
 	template<typename T, typename C>
 	bool Stack<T, C>::empty() const {
-		return (this->_cont.empty());
+		return this->_cont.empty();
 	}
 
 	template<typename T, typename C>
 	size_t Stack<T, C>::size() const {
-		return (this->_cont.size());
+		return this->_cont.size();
 	}
 
 	template<typename T, typename C>
 	typename Stack<T, C>::reference Stack<T, C>::top() {
-		return (this->_cont.back());
+		return this->_cont.back();
 	}
 
 	template<typename T, typename C>
 	typename Stack<T, C>::const_reference Stack<T, C>::top() const {
-		return (this->_cont.back());
+		return this->_cont.back();
 	}
 
 	template<typename T, typename C>
@@ -67,39 +65,37 @@
 	template<typename stack_type, typename container_type>
 	bool operator==(const Stack<stack_type, container_type> &lhs,
 					const Stack<stack_type, container_type> &rhs) {
-		return (lhs._cont == rhs._cont);
+		return lhs._cont == rhs._cont;
 	}
 
 	template<typename stack_type, typename container_type>
 	bool operator!=(const Stack<stack_type, container_type> &lhs,
 					const Stack<stack_type, container_type> &rhs) {
-		return (lhs._cont != rhs._cont);
+		return lhs._cont != rhs._cont;
 	}
 
 	template<typename stack_type, typename container_type>
 	bool operator<(const Stack<stack_type, container_type> &lhs,
 				   const Stack<stack_type, container_type> &rhs) {
-		return (lhs._cont < rhs._cont);
+		return lhs._cont < rhs._cont;
 	}
 
 	template<typename stack_type, typename container_type>
 	bool operator<=(const Stack<stack_type, container_type> &lhs,
 					const Stack<stack_type, container_type> &rhs) {
-		return (lhs._cont <= rhs._cont);
+		return lhs._cont <= rhs._cont;
 	}
 
 	template<typename stack_type, typename container_type>
 	bool operator>(const Stack<stack_type, container_type> &lhs,
 				   const Stack<stack_type, container_type> &rhs) {
-		return (lhs._cont > rhs._cont);
+		return lhs._cont > rhs._cont;
 	}
 
 	template<typename stack_type, typename container_type>
 	bool operator>=(const Stack<stack_type, container_type> &lhs,
 					const Stack<stack_type, container_type> &rhs) {
-		return (lhs._cont >= rhs._cont);
+		return lhs._cont >= rhs._cont;
 	}
 
 #pragma endregion
-
-//}
