@@ -46,6 +46,7 @@ namespace ft {
 	**	OPERATORS						**
 	*************************************/
 	public:
+//		todo: remove friend
 		template<typename stack_type, typename container_type>
 		friend bool operator==(Stack<stack_type, container_type> const &lhs, Stack<stack_type, container_type> const &rhs);
 		template<typename stack_type, typename container_type>
