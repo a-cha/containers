@@ -53,7 +53,7 @@ namespace ft {
 		node_type *getPoint() const;
 
 //	todo do i need this strange method?
-		node_type * &ptr(void) {
+		node_type * &ptr() {
 			return this->_point;
 		}
 
@@ -62,6 +62,7 @@ namespace ft {
 	*************************************/
 	public:
 		ListIterator &		operator++();
+		ListIterator		operator++(int);
 		ListIterator &		operator--();
 		value_type *		operator->();
 		value_type &		operator*();
@@ -69,8 +70,6 @@ namespace ft {
 		ListIterator		operator-(int n) const;
 		void				operator+=(int n);
 		void				operator-=(int n);
-
-		ListIterator operator++(int);
 
 		bool				operator==(ListIterator const &other) const;
 		bool				operator!=(ListIterator const &other) const;
