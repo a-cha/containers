@@ -4,8 +4,7 @@
 
 #pragma once
 
-#include "RevIterator.hpp"
-
+namespace ft {
 /**	CONSTRUCTORS					**/
 #pragma region Constructors
 
@@ -80,3 +79,4 @@
 		return &*--tmp;
 	}
 #pragma endregion
+}
