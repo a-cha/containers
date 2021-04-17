@@ -16,10 +16,10 @@ void start_all_std_tests(void) {
 
 	test("Stack");
 	test_Stack<std::stack<int, std::list<int> >, std::list<int> >();
-//	test_Stack<std::stack<int, std::vector<int> >, std::vector<int> >();
+	test_Stack<std::stack<int, std::vector<int> >, std::vector<int> >();
 #ifdef FULL
-//	test_Stack<std::stack<Number>, std::deque<Number> >();
-//	test_Stack<std::stack<Number, std::vector<Number> >, std::vector<Number> >();
+	test_Stack<std::stack<Number>, std::deque<Number> >();
+	test_Stack<std::stack<Number, std::vector<Number> >, std::vector<Number> >();
 #endif
 	end_test("Stack");
 
@@ -30,9 +30,7 @@ void start_all_std_tests(void) {
 #endif
 	end_test("Vector");
 
-/*
 	test("Queue");
-	test_Queue<std::queue<int>, std::deque<int> >();
 	test_Queue<std::queue<int, std::list<int> >, std::list<int> >();
 #ifdef FULL
 	test_Queue<std::queue<Number>, std::deque<Number> >();
@@ -41,46 +39,15 @@ void start_all_std_tests(void) {
 	end_test("Queue");
 
 	test("Map");
-	test_Map<std::map<int, int> >();
+	test_Map<std::Map<int, int> >();
 #ifdef FULL
-	test_Map<std::map<char, int> >(48);
-	test_Map<std::map<char, Number> >(48);
-	test_Map<std::map<Number, int> >();
-	test_Map<std::map<Number, Number> >();
+	test_Map<std::Map<char, int> >(48);
+	test_Map<std::Map<char, Number> >(48);
+	test_Map<std::Map<Number, int> >();
+	test_Map<std::Map<Number, Number> >();
 #endif
 	end_test("Map");
 
-	test("Multimap");
-	test_Multimap<std::multimap<int, int> >();
-#ifdef FULL
-	test_Multimap<std::multimap<char, int> >(48);
-	test_Multimap<std::multimap<char, Number> >(48);
-	test_Multimap<std::multimap<Number, int> >();
-	test_Multimap<std::multimap<Number, Number> >();
-#endif
-	end_test("Multimap");
-
-	test("Set");
-	test_Set<std::set<int> >();
-#ifdef FULL
-	test_Set<std::set<Number> >();
-#endif
-	end_test("Set");
-
-	test("Multiset");
-	test_Multiset<std::multiset<int> >();
-#ifdef FULL
-	test_Multiset<std::multiset<Number> >();
-#endif
-	end_test("Multiset");
-
-	test("Deque");
-	test_Deque<std::deque<int> >();
-#ifdef FULL
-	test_Deque<std::deque<Number> >();
-#endif
-	end_test("Deque");
-*/
 }
 
 /**
@@ -96,7 +63,7 @@ void start_all_ft_tests(void) {
 
 	test("Stack");
 	test_Stack<ft::Stack<int>, ft::List<int> >();
-//	test_Stack<ft::Stack<int, ft::Vector<int> >, ft::Vector<int> >();
+	test_Stack<ft::Stack<int, ft::Vector<int> >, ft::Vector<int> >();
 #ifdef FULL
 	test_Stack<ft::Stack<Number>, ft::List<Number> >();
 	test_Stack<ft::Stack<Number, ft::Deque<Number> >, ft::Deque<Number> >();
@@ -110,10 +77,8 @@ void start_all_ft_tests(void) {
 #endif
 	end_test("Vector");
 
-/*
 	test("Queue");
 	test_Queue<ft::Queue<int>, ft::List<int> >();
-	test_Queue<ft::Queue<int, ft::Deque<int> >, ft::Deque<int> >();
 #ifdef FULL
 	test_Queue<ft::Queue<Number>, ft::List<Number> >();
 	test_Queue<ft::Queue<Number, ft::Deque<Number> >, ft::Deque<Number> >();
@@ -130,37 +95,6 @@ void start_all_ft_tests(void) {
 #endif
 	end_test("Map");
 
-	test("Multimap");
-	test_Multimap<ft::Multimap<int, int> >();
-#ifdef FULL
-	test_Multimap<ft::Multimap<char, int> >(48);
-	test_Multimap<ft::Multimap<char, Number> >(48);
-	test_Multimap<ft::Multimap<Number, int> >();
-	test_Multimap<ft::Multimap<Number, Number> >();
-#endif
-	end_test("Multimap");
-
-	test("Set");
-	test_Set<ft::Set<int> >();
-#ifdef FULL
-	test_Set<ft::Set<Number> >();
-#endif
-	end_test("Set");
-
-	test("Multiset");
-	test_Multiset<ft::Multiset<int> >();
-#ifdef FULL
-	test_Multiset<ft::Multiset<Number> >();
-#endif
-	end_test("Multiset");
-
-	test("Deque");
-	test_Deque<ft::Deque<int> >();
-#ifdef FULL
-	test_Deque<ft::Deque<Number> >();
-#endif
-	end_test("Deque");
-*/
 }
 
 int main(void)
