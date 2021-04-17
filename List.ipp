@@ -124,9 +124,7 @@ namespace ft {
 
 	template<typename T, class Alloc>
 	typename List<T, Alloc>::size_type List<T, Alloc>::max_size() const {
-		return (ft::min((size_type) std::numeric_limits<difference_type>::max(),
-						std::numeric_limits<size_type>::max() /
-						(sizeof(node_type) - sizeof(pointer))));
+		return (std::numeric_limits<size_type>::max() / (sizeof(node_type)));
 	}
 
 #pragma endregion
@@ -476,9 +474,9 @@ namespace ft {
 
 		size_t limit = this->_size / 2;
 		for (size_t i = 0; i < limit; ++i) {
-			begin.getPoint()->swap(end.getPoint());
 			++begin;
 			--end;
+			begin.getPoint()->swap(end.getPoint());
 		}
 		while (end.getPoint()->getPrev())
 			--end;
