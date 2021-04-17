@@ -35,12 +35,12 @@ namespace ft {
 	**	METHODS							**
 	*************************************/
 	public:
-		bool			empty(void) const;
-		size_t			size(void) const;
-		reference		top(void);
-		const_reference	top(void) const;
+		bool			empty() const;
+		size_t			size() const;
+		reference		top();
+		const_reference	top() const;
 		void			push(const_reference val);
-		void			pop(void);
+		void			pop();
 
 	/*************************************
 	**	OPERATORS						**

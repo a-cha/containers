@@ -30,22 +30,22 @@
 #pragma region Member functions
 
 	template<typename T, typename C>
-	bool Stack<T, C>::empty(void) const {
+	bool Stack<T, C>::empty() const {
 		return (this->_cont.empty());
 	}
 
 	template<typename T, typename C>
-	size_t Stack<T, C>::size(void) const {
+	size_t Stack<T, C>::size() const {
 		return (this->_cont.size());
 	}
 
 	template<typename T, typename C>
-	typename Stack<T, C>::reference Stack<T, C>::top(void) {
+	typename Stack<T, C>::reference Stack<T, C>::top() {
 		return (this->_cont.back());
 	}
 
 	template<typename T, typename C>
-	typename Stack<T, C>::const_reference Stack<T, C>::top(void) const {
+	typename Stack<T, C>::const_reference Stack<T, C>::top() const {
 		return (this->_cont.back());
 	}
 
@@ -55,7 +55,7 @@
 	}
 
 	template<typename T, typename C>
-	void Stack<T, C>::pop(void) {
+	void Stack<T, C>::pop() {
 		this->_cont.pop_back();
 	}
 
