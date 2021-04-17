@@ -20,9 +20,9 @@ namespace ft {
 	public:
 		typedef T					value_type;
 		typedef value_type *		pointer;
-		typedef value_type const *	const_pointer;
-		typedef value_type &		reference;
-		typedef value_type const &	const_reference;
+		typedef value_type const *	const_point;
+		typedef value_type &		ref;
+		typedef value_type const &	const_ref;
 		typedef std::ptrdiff_t		difference_type;
 
 	/*************************************
@@ -31,98 +31,48 @@ namespace ft {
 	public:
 		VectorIterator();
 		VectorIterator(VectorIterator const &other);
-		VectorIterator &operator=(VectorIterator const &other);
+		VectorIterator & operator=(VectorIterator const &other);
 		~VectorIterator();
 
 	/*************************************
 	**	CONSTRUCTORS					**
 	*************************************/
 	public:
-		VectorIterator(pointer p): _point(p) {}
+		VectorIterator(pointer p);
 
 	/*************************************
 	**	OPERATORS						**
 	*************************************/
 	public:
-		reference operator*() {
-			return (*this->_point);
-		}
+		VectorIterator &	operator++();
+		VectorIterator		operator++(int);
+		VectorIterator &	operator--();
+		VectorIterator		operator--(int);
+		const_point			operator->() const;
+		ref					operator*();
+		const_ref			operator*() const;
+		pointer				operator->();
+		ref					operator[](int n);
+		const_ref			operator[](int n) const;
+		VectorIterator &	operator+=(int n);
+		VectorIterator		operator+(int n) const;
+		VectorIterator &	operator-=(int n);
+		VectorIterator		operator-(int n) const;
+		difference_type		operator-(VectorIterator const &other) const;
+		bool				operator==(VectorIterator const &other) const;
+		bool				operator!=(VectorIterator const &other) const;
+		bool				operator>(VectorIterator const &other) const;
+		bool				operator<(VectorIterator const &other) const;
+		bool				operator>=(VectorIterator const &other) const;
+		bool				operator<=(VectorIterator const &other) const;
 
-		const_reference operator*() const {
-			return (*this->_point);
-		}
-		pointer operator->() {
-			return (this->_point);
-		}
-		const_pointer operator->() const {
-			return (this->_point);
-		}
-		reference operator[](int val) {
-			return (*(this->_point + val));
-		}
-		const_reference operator[](int val) const {
-			return (*(this->_point + val));
-		}
-		VectorIterator operator++(int) {
-			VectorIterator tmp(*this);
-			++this->_point;
-			return (tmp);
-		}
-
-		VectorIterator &operator++() {
-			++this->_point;
-			return (*this);
-		}
-		VectorIterator operator--(int) {
-			VectorIterator tmp(*this);
-			--this->_point;
-			return (tmp);
-		}
-		VectorIterator &operator--() {
-			--this->_point;
-			return (*this);
-		}
-		VectorIterator &operator+=(int value) {
-			this->_point += value;
-			return (*this);
-		}
-
-		VectorIterator operator+(int value) const {
-			VectorIterator tmp(*this);
-			return (tmp += value);
-		}
-		VectorIterator &operator-=(int value) {
-			this->_point -= value;
-			return (*this);
-		}
-		VectorIterator operator-(int value) const {
-			VectorIterator tmp(*this);
-			return (tmp -= value);
-		}
-		difference_type operator-(VectorIterator const &other) const {
-			return (this->_point - other._point);
-		}
-		bool operator==(VectorIterator const &other) const {
-			return (this->_point == other._point);
-		}
-
-		bool operator!=(VectorIterator const &other) const {
-			return (this->_point != other._point);
-		}
-		bool operator<(VectorIterator const &other) const {
-			return (this->_point < other._point);
-		}
-		bool operator<=(VectorIterator const &other) const {
-			return (this->_point <= other._point);
-		}
-		bool operator>(VectorIterator const &other) const {
-			return (this->_point > other._point);
-		}
-		bool operator>=(VectorIterator const &other) const {
-			return (this->_point >= other._point);
-		}
+	/*************************************
+	**	FIELDS							**
+	*************************************/
 	private:
 		pointer _point;
 	};
+
+#include "VectorIterator.ipp"
 
 }
