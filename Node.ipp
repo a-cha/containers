@@ -48,7 +48,6 @@ Node<value_type>::Node(value_type const &val, Node *prev, Node *next) :
 		_next(next) {}
 #pragma endregion
 
-//  TODO have I need more getters?
 /**	GETTERS							**/
 #pragma region Getters
 
