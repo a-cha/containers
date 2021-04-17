@@ -32,7 +32,6 @@ namespace ft {
 		typedef ptrdiff_t											difference_type;
 		typedef size_t												size_type;
 
-
 	/*************************************
 	**	COPLIEN FORM					**
 	*************************************/
@@ -42,14 +41,12 @@ namespace ft {
 		List &operator=(List const &other);
 		~List();
 
-
 	/*************************************
 	**	CONSTRUCTORS					**
 	*************************************/
 	public:
 		List(size_type n, const_ref val=value_type());
 		List(iterator first, iterator last);
-
 
 	/*************************************
 	**	METHODS							**
@@ -110,7 +107,6 @@ namespace ft {
 		template<typename Compare>
 		void				sort(Compare comp);
 		void				reverse();
-
 
 	/*************************************
 	**	FIELDS							**
