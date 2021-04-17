@@ -116,8 +116,8 @@ namespace ft {
 		node_point			_beginNode;
 		node_point			_endNode;
 
-		void make_bounds(void);
-		void reset_bounds(void);
+		void				make_bounds();
+		void				reset_bounds();
 	};
 }
 

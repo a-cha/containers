@@ -543,19 +543,18 @@ namespace ft {
 #pragma region Utils
 
 	template<typename T, class Alloc>
-	void List<T, Alloc>::make_bounds(void) {
-		this->_endNode = new Node<value_type>();
-		this->reset_bounds();
+	void List<T, Alloc>::make_bounds() {
+		_endNode = new Node<value_type>();
+		reset_bounds();
 	}
 
 	template<typename T, class Alloc>
-	void List<T, Alloc>::reset_bounds(void) {
-		this->_beginNode = this->_endNode;
-		this->_endNode->setPrev(0);
-		this->_endNode->setNext(0);
-		this->_size = 0;
+	void List<T, Alloc>::reset_bounds() {
+		_beginNode = _endNode;
+		_endNode->setPrev(0);
+		_endNode->setNext(0);
+		_size = 0;
 	}
-
 #pragma endregion
 
 }
