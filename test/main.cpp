@@ -23,7 +23,6 @@ void start_all_std_tests(void) {
 #endif
 	end_test("Stack");
 
-/*
 	test("Vector");
 	test_Vector<std::vector<int> >();
 #ifdef FULL
@@ -31,6 +30,7 @@ void start_all_std_tests(void) {
 #endif
 	end_test("Vector");
 
+/*
 	test("Queue");
 	test_Queue<std::queue<int>, std::deque<int> >();
 	test_Queue<std::queue<int, std::list<int> >, std::list<int> >();
@@ -103,7 +103,6 @@ void start_all_ft_tests(void) {
 #endif
 	end_test("Stack");
 
-/*
 	test("Vector");
 	test_Vector<ft::Vector<int> >();
 #ifdef FULL
@@ -111,6 +110,7 @@ void start_all_ft_tests(void) {
 #endif
 	end_test("Vector");
 
+/*
 	test("Queue");
 	test_Queue<ft::Queue<int>, ft::List<int> >();
 	test_Queue<ft::Queue<int, ft::Deque<int> >, ft::Deque<int> >();

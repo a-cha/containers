@@ -261,10 +261,10 @@ namespace ft {
 	typename List<T, Alloc>::iterator List<T, Alloc>::erase(iterator pos) {
 		if (pos == this->begin()) {
 			this->pop_front();
-			return (this->begin());
+			return this->begin();
 		} else if (pos == this->end()) {
 			this->pop_back();
-			return (this->end());
+			return this->end();
 		}
 		node_point next = pos.getPoint()->getNext();
 		pos.getPoint()->detach();

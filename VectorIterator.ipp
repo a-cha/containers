@@ -23,13 +23,16 @@ VectorIterator<T> &VectorIterator<T>::operator=(const VectorIterator &other) {
 		_point = other._point;
 	return *this;
 }
+
+template<typename T>
+VectorIterator<T>::~VectorIterator() {}
 #pragma endregion
 
 /**	CONSTRUCTORS					**/
 #pragma region Constructors
 
 template<typename T>
-VectorIterator<T>::VectorIterator(typaname VectorIterator<T>::pointer p) :
+VectorIterator<T>::VectorIterator(typename VectorIterator<T>::pointer p) :
 	_point(p) {}
 #pragma endregion
 
@@ -72,13 +75,34 @@ typename VectorIterator<T>::ref VectorIterator<T>::operator*() {
 }
 
 template<typename T>
-typename VectorIterator<T>::const_ref VectorIterator<T>::operator*() {
+typename VectorIterator<T>::const_ref VectorIterator<T>::operator*() const {
 	return *_point;
 }
 
 template<typename T>
 typename VectorIterator<T>::pointer VectorIterator<T>::operator->() {
 	return _point;
+}
+
+template<typename T>
+typename VectorIterator<T>::const_point VectorIterator<T>::operator->() const {
+	return _point;
+}
+
+template<typename T>
+typename VectorIterator<T>::ref VectorIterator<T>::operator[](int n) {
+	return *(_point + n);
+}
+
+template<typename T>
+typename VectorIterator<T>::const_ref VectorIterator<T>::operator[](int n) const {
+	return *(_point + n);
+}
+
+template<typename T>
+VectorIterator<T> & VectorIterator<T>::operator+=(int n) {
+	_point += n;
+	return *this;
 }
 
 template<typename T>
@@ -91,37 +115,13 @@ VectorIterator<T> VectorIterator<T>::operator+(int n) const {
 }
 
 template<typename T>
-typename VectorIterator<T>::ref VectorIterator<T>::operator[](int n) {
-	return *(_point + n);
-}
-
-template<typename T>
-typename VectorIterator<T>::const_ref VectorIterator<T>::operator[](int n) {
-	return *(_point + n);
-}
-
-template<typename T>
-VectorIterator<T> & VectorIterator<T>::operator+=(int n) {
-	_point += n;
-	return *this;
-}
-
-template<typename T>
-VectorIterator<T> VectorIterator<T>::operator+(int n) {
-	VectorIterator tmp;
-
-	tmp = *this;
-	return tmp += n;
-}
-
-template<typename T>
 VectorIterator<T> & VectorIterator<T>::operator-=(int n) {
 	_point -= n;
 	return *this;
 }
 
 template<typename T>
-VectorIterator<T> VectorIterator<T>::operator-(int n) {
+VectorIterator<T> VectorIterator<T>::operator-(int n) const {
 	VectorIterator tmp;
 
 	tmp = *this;
