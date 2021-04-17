@@ -75,7 +75,6 @@ namespace ft {
 	private:
 		container_type _cont;
 	};
+}
 
 #include "Queue.ipp"
-
-}

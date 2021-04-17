@@ -66,7 +66,6 @@ namespace ft {
 	private:
 		container_type _cont;
 	};
+}
 
 #include "Stack.ipp"
-
-}

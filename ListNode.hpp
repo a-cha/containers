@@ -62,7 +62,6 @@ namespace ft {
 		ListNode<value_type> *	_next;
 		ListNode<value_type> *	_prev;
 	};
+}
 
 #include "ListNode.ipp"
-
-}

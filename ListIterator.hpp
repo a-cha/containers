@@ -84,7 +84,6 @@ namespace ft {
 	private:
 		node_type * _point;
 	};
+}
 
 #include "ListIterator.ipp"
-
-}

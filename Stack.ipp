@@ -4,6 +4,8 @@
 
 #pragma once
 
+namespace ft {
+
 /**	COPLIEN FORM					**/
 #pragma region Coplien
 
@@ -14,7 +16,7 @@
 	Stack<T, C>::Stack(const Stack &other) : _cont(other._cont) {}
 
 	template<typename T, typename C>
-	Stack<T, C> &Stack<T, C>::operator=(const Stack &other) {
+	Stack <T, C> &Stack<T, C>::operator=(const Stack &other) {
 		_cont = other._cont;
 		return *this;
 	}
@@ -63,39 +65,40 @@
 #pragma region Relational operators
 
 	template<typename stack_type, typename container_type>
-	bool operator==(const Stack<stack_type, container_type> &lhs,
-					const Stack<stack_type, container_type> &rhs) {
+	bool operator==(const Stack <stack_type, container_type> &lhs,
+					const Stack <stack_type, container_type> &rhs) {
 		return lhs._cont == rhs._cont;
 	}
 
 	template<typename stack_type, typename container_type>
-	bool operator!=(const Stack<stack_type, container_type> &lhs,
-					const Stack<stack_type, container_type> &rhs) {
+	bool operator!=(const Stack <stack_type, container_type> &lhs,
+					const Stack <stack_type, container_type> &rhs) {
 		return lhs._cont != rhs._cont;
 	}
 
 	template<typename stack_type, typename container_type>
-	bool operator<(const Stack<stack_type, container_type> &lhs,
-				   const Stack<stack_type, container_type> &rhs) {
+	bool operator<(const Stack <stack_type, container_type> &lhs,
+				   const Stack <stack_type, container_type> &rhs) {
 		return lhs._cont < rhs._cont;
 	}
 
 	template<typename stack_type, typename container_type>
-	bool operator<=(const Stack<stack_type, container_type> &lhs,
-					const Stack<stack_type, container_type> &rhs) {
+	bool operator<=(const Stack <stack_type, container_type> &lhs,
+					const Stack <stack_type, container_type> &rhs) {
 		return lhs._cont <= rhs._cont;
 	}
 
 	template<typename stack_type, typename container_type>
-	bool operator>(const Stack<stack_type, container_type> &lhs,
-				   const Stack<stack_type, container_type> &rhs) {
+	bool operator>(const Stack <stack_type, container_type> &lhs,
+				   const Stack <stack_type, container_type> &rhs) {
 		return lhs._cont > rhs._cont;
 	}
 
 	template<typename stack_type, typename container_type>
-	bool operator>=(const Stack<stack_type, container_type> &lhs,
-					const Stack<stack_type, container_type> &rhs) {
+	bool operator>=(const Stack <stack_type, container_type> &lhs,
+					const Stack <stack_type, container_type> &rhs) {
 		return lhs._cont >= rhs._cont;
 	}
-
 #pragma endregion
+
+}

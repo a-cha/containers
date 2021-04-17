@@ -5,6 +5,7 @@
 #pragma once
 
 namespace ft {
+
 /**	CONSTRUCTORS					**/
 #pragma region Constructors
 
@@ -79,4 +80,5 @@ namespace ft {
 		return &*--tmp;
 	}
 #pragma endregion
+
 }

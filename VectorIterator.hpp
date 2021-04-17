@@ -72,7 +72,6 @@ namespace ft {
 	private:
 		pointer _point;
 	};
+}
 
 #include "VectorIterator.ipp"
-
-}
