@@ -50,7 +50,6 @@ namespace ft {
 	**	OPERATORS						**
 	*************************************/
 	public:
-//		todo: remove friend
 		template<typename queue_type, typename container_type>
 		friend bool operator==(Queue<queue_type, container_type> const &lhs, Queue<queue_type, container_type> const &rhs);
 
