@@ -33,52 +33,26 @@ namespace ft {
 	**	COPLIEN FORM					**
 	*************************************/
 	public:
-		MapNode(): _parent(NULL), _right(NULL), _left(NULL), _height(1), _data() {
-			_pair_init = _alloc.allocate(1);
-			_alloc.construct(_pair_init, _data);
-		}
-		MapNode(const MapNode &other)
-				:_alloc(other._alloc), _pair_init(other._pair_init), _parent(other._parent),
-				 _right(other._right), _left(other._left), _height(other._height), _data(other._data) {
-			_pair_init = _alloc.allocate(1);
-			_alloc.construct(_pair_init, _data);
-		}
-		const MapNode&operator=(const MapNode &rhs) {
-			if (*this == *rhs)
-				return (*this);
-			_alloc = rhs._alloc;
-			_pair_init = rhs._pair_init;
-			_parent = rhs._parent;
-			_right = rhs._right;
-			_left = rhs._left;
-			_height = rhs._height;
-			_data = rhs._data;
-			return (*this);
-		}
-		~MapNode() {
-			_alloc.destroy(_pair_init);
-			_alloc.deallocate(_pair_init, 1);
-		}
+		MapNode();
+		MapNode(const MapNode &other);
+		const MapNode&operator=(const MapNode &rhs);
+		~MapNode();
 
 	/*************************************
 	**	CONSTRUCTORS					**
 	*************************************/
 	public:
-		MapNode(const value_type &data): _parent(NULL), _right(NULL), _left(NULL), _height(1), _data(data) {
-			_pair_init = _alloc.allocate(1);
-			_alloc.construct(_pair_init, _data);
-		}
+		MapNode(const value_type &data);
 
 	/*************************************
 	**	FIELDS							**
 	*************************************/
 	private:
-		typedef typename allocator_type::template
-		rebind<value_type>::other pair_alloc;
-		typedef typename pair_alloc::pointer _pair_pointer;
+		typedef typename			allocator_type::template
+		rebind<value_type>::other	pair_alloc;
+		typedef typename			pair_alloc::pointer _pair_pointer;
 		allocator_type 	_alloc;
 		_pair_pointer	_pair_init;
-
 	public:
 		MapNode*		_parent;
 		MapNode*		_right;
@@ -87,3 +61,5 @@ namespace ft {
 		value_type		_data;
 	};
 }
+
+#include "MapNode.ipp"
