@@ -4,9 +4,6 @@
 
 #pragma once
 
-
-#include "Map.hpp"
-
 namespace ft {
 
 /**	COPLIEN FORM					**/
@@ -351,6 +348,336 @@ namespace ft {
 			typename Map<Key, T, Compare, Alloc>::const_iterator>
 	Map<Key, T, Compare, Alloc>::equal_range(const key_type &k) const {
 		return pair<const_iterator, const_iterator>(lower_bound(k), upper_bound(k));
+	}
+#pragma endregion
+
+/**	OPERATORS						**/
+#pragma region Operators
+
+	template <class T1, class T2>
+	bool operator==(const pair<T1,T2> & lhs, const pair<T1,T2> & rhs) {
+		return lhs.first==rhs.first && lhs.second==rhs.second;
+	}
+
+	template <class T1, class T2>
+	bool operator!=(const pair<T1,T2> & lhs, const pair<T1,T2> & rhs) {
+		return !(lhs==rhs);
+	}
+
+	template <class T1, class T2>
+	bool operator<(const pair<T1,T2> & lhs, const pair<T1,T2> & rhs) {
+		return lhs.first<rhs.first;
+	}
+
+	template <class T1, class T2>
+	bool operator<=(const pair<T1,T2> & lhs, const pair<T1,T2> & rhs) {
+		return !(rhs<lhs);
+	}
+
+	template <class T1, class T2>
+	bool operator>(const pair<T1,T2> & lhs, const pair<T1,T2> & rhs) {
+		return rhs<lhs;
+	}
+
+	template <class T1, class T2>
+	bool operator>=(const pair<T1,T2> & lhs, const pair<T1,T2> & rhs) {
+		return !(lhs<rhs);
+	}
+#pragma endregion
+
+/**	UTILS							**/
+#pragma region Node
+
+	template<class Key, class T, class Compare, class Alloc>
+	typename Map<Key, T, Compare, Alloc>::pointer Map<Key, T, Compare, Alloc>
+	        ::initNode() {
+		node * new_node;
+
+		new_node = _alloc.allocate(1);
+		_alloc.construct(new_node, node_type());
+		new_node->_parent = 0;
+		new_node->_left = 0;
+		new_node->_right = 0;
+		new_node->_height = 0;
+		return (new_node);
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	typename Map<Key, T, Compare, Alloc>::pointer Map<Key, T, Compare, Alloc>
+	        ::makeNode(const Map::value_type &data) {
+		node * new_node;
+
+		new_node = _alloc.allocate(1);
+		_alloc.construct(new_node, data);
+		return (new_node);
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	void Map<Key, T, Compare, Alloc>::removeNode(Map::node *other) {
+		_alloc.destroy(other);
+		_alloc.deallocate(other, 1);
+	}
+#pragma endregion
+
+#pragma region Tree
+
+	template<class Key, class T, class Compare, class Alloc>
+	typename Map<Key, T, Compare, Alloc>::node *Map<Key, T, Compare, Alloc>
+	        ::treeAdd(Map::node *current, Map::node *new_node) {
+		if (_val_comp(new_node->_data, current->_data)) {
+			if (current->_left)
+				new_node = treeAdd(current->_left, new_node);
+			else {
+				new_node->_parent = current;
+				current->_left = new_node;
+			}
+		} else if (_val_comp(current->_data, new_node->_data)) {
+			if (current->_right)
+				new_node = treeAdd(current->_right, new_node);
+			else {
+				new_node->_parent = current;
+				current->_right = new_node;
+			}
+		} else
+			return current;
+		balance(current);
+		return new_node;
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	typename Map<Key, T, Compare, Alloc>::node *Map<Key, T, Compare, Alloc>
+	        ::balance(Map::node *current) {
+		treeOverHead(current);
+		int  BF_count = BF(current);
+		if (BF_count == 2) {
+			if (BF(current->_right)<0)
+				current->_right = treeRight(current->_right);
+			return treeLeft(current);
+		}
+		if (BF_count == -2) {
+			if (BF(current->_left)>0)
+				current->_left = treeLeft(current->_left);
+			return treeRight(current);
+		}
+		return current;
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	int Map<Key, T, Compare, Alloc>::BF(Map::node *current) {
+		int h_left = 0;
+		int h_right = 0;
+
+		h_left = (current->_left ? current->_left->_height : 0);
+		h_right = (current->_right ? current->_right->_height : 0);
+		return ((h_right) - (h_left));
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	void Map<Key, T, Compare, Alloc>::treeOverHead(Map::node * current) {
+		int h_left = 0;
+		int h_right = 0;
+		if (current->_left)
+			h_left = current->_left->_height;
+		if (current->_right)
+			h_right = current->_right->_height;
+		current->_height = ((h_left>h_right) ? h_left : h_right) + 1;
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	typename Map<Key, T, Compare, Alloc>::node * Map<Key, T, Compare, Alloc>
+	        ::treeRight(Map::node * r) {
+		node* l = r->_left;
+		node* r2 = l->_right;
+		if (r->_parent) {
+			if (r->_parent->_left == r)
+				r->_parent->_left = l;
+			else
+				r->_parent->_right = l;
+		}
+		l->_parent = r->_parent;
+		l->_right = r;
+		r->_parent = l;
+		r->_left = r2;
+		if (r2)
+			r2->_parent = r;
+		treeOverHead(r);
+		treeOverHead(l);
+		return l;
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	typename Map<Key, T, Compare, Alloc>::node * Map<Key, T, Compare, Alloc>
+	        ::treeLeft(Map::node * l) {
+		node* r = l->_right;
+		node* l2 = r->_left;
+		if (l->_parent) {
+			if (l->_parent->_left == l)
+				l->_parent->_left = r;
+			else
+				l->_parent->_right = r;
+		}
+		r->_parent = l->_parent;
+		r->_left = l;
+		l->_parent = r;
+		l->_right = l2;
+		if (l2)
+			l2->_parent = l;
+		treeOverHead(l);
+		treeOverHead(r);
+		return r;
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	typename Map<Key, T, Compare, Alloc>::node * Map<Key, T, Compare, Alloc>
+	        ::treeGetInit(Map::node * current) {
+		while (current->_parent)
+			current = current->_parent;
+		return (current);
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	typename Map<Key, T, Compare, Alloc>::node * Map<Key, T, Compare, Alloc>
+	        ::treeFindRec(Map::node * current, const key_type k) const {
+		if (!current)
+			return NULL;
+		else if (current->_data.first > k)
+			return treeFindRec(current->_left, k);
+		else if (current->_data.first < k)
+			return treeFindRec(current->_right, k);
+		else
+			return current;
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	typename Map<Key, T, Compare, Alloc>::node * Map<Key, T, Compare, Alloc>
+	        ::FIND_NEAR(Map::node *current, const key_type &k) const {
+		if (!current)
+			return NULL;
+		else if (_key_comp(current->_data.first, k)) {
+			node* tmp = FIND_NEAR(current->_right, k);
+			if (tmp) return tmp;
+		}
+		else if (_key_comp(k, current->_data.first)) {
+			node* tmp = FIND_NEAR(current->_left, k);
+			if (tmp) return tmp;
+		}
+		return current;
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	void Map<Key, T, Compare, Alloc>::linkTreeDefault() const {
+		if (!_init_node) {
+			_begin_node->_parent = _end_node;
+			_end_node->_parent =_begin_node;
+		} else {
+			node* tmp = _init_node;
+			while (tmp->_left && (tmp->_left != _begin_node))
+				tmp = tmp->_left;
+			_begin_node->_parent = tmp;
+			tmp->_left = _begin_node;
+			tmp = _init_node;
+			while (tmp->_right && (tmp->_right != _end_node))
+				tmp = tmp->_right;
+			_end_node->_parent = tmp;
+			tmp->_right = _end_node;
+		}
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	void Map<Key, T, Compare, Alloc>::unlinkTree() const {
+		if (_init_node) {
+			_begin_node->_parent->_left = NULL;
+			_end_node->_parent->_right = NULL;
+			_begin_node->_parent = _end_node;
+			_end_node->_parent = _begin_node;
+		}
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	typename Map<Key, T, Compare, Alloc>::node *Map<Key, T, Compare, Alloc>
+	        ::pushNode(Map::node *current, Map::node *new_node) {
+		unlinkTree();
+		if (!_init_node)
+			_init_node = new_node;
+		else {
+			new_node = treeAdd(current, new_node);
+			_init_node = treeGetInit(_init_node);
+		}
+		linkTreeDefault();
+		return new_node;
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	bool Map<Key, T, Compare, Alloc>::DeletingNode(key_type k) {
+		unlinkTree();
+		ft::pair<node *, bool> res;
+		node* finish = deleteNode(_init_node, k, &res);
+		_init_node = finish;
+		linkTreeDefault();
+		return res.second;
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	typename Map<Key, T, Compare, Alloc>::node * Map<Key, T, Compare, Alloc>
+	        ::deleteNode(Map::node *x, const key_type &k, pair<node *, bool> *ret) {
+		if (!x)
+			return NULL;
+		if (k < x->_data.first) {
+			x->_left = deleteNode(x->_left, k, ret);
+		} else if (x->_data.first < k) {
+			x->_right = deleteNode(x->_right, k, ret);
+		} else if  (k == x->_data.first) {
+			ret->second = true;
+			int x_key = x->_data.first;
+			node* parent = x->_parent;
+			node* l = x->_left;
+			node* r = x->_right;
+			removeNode(x);
+			if (!r) {
+				if (parent && l) {
+					l->_parent = parent;
+					if (x_key < parent->_data.first)
+						parent->_left = l;
+					else
+						parent->_right = l;
+				}
+				return l;
+			}
+			node * min = findMin(r);
+			min->_left = l;
+			if (l)
+				l->_parent = min;
+			if (parent) {
+				r->_parent = parent;
+				if (x_key < parent->_data.first)
+					parent->_left = x->_right;
+				else
+					parent->_right = x->_right;
+			} else {
+				_init_node = r;
+				r->_parent = NULL;
+				balance(min);
+				return balance(_init_node);
+			}
+			return treeBalance(r);
+		}
+		return balance(x);
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	typename Map<Key, T, Compare, Alloc>::node *Map<Key, T, Compare, Alloc>
+	        ::findMin(Map::node *x) {
+		if (x->_left) return findMin(x->_left);
+		else return x;
+	}
+
+	template<class Key, class T, class Compare, class Alloc>
+	typename Map<Key, T, Compare, Alloc>::node *Map<Key, T, Compare, Alloc>
+	        ::treeBalance(Map::node *x) {
+		if (x->_left) {
+			treeBalance(x->_left);
+		}
+		return balance(x);
 	}
 #pragma endregion
 
