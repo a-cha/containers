@@ -201,7 +201,6 @@ namespace ft {
 		}
 	}
 
-//	todo: how it works?
 	template<class Key, class T, class Compare, class Alloc>
 	void Map<Key, T, Compare, Alloc>::erase(Map::iterator pos) {
 		erase(pos._data->_data.first);
