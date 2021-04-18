@@ -221,7 +221,7 @@ int test_Map_std () {
 	}
 
 
-	std::cout << std::endl << "---value_comp" << std::endl << std::endl;
+	std::cout << std::endl << "---getValueComp" << std::endl << std::endl;
 	{
 		std::map<char,int> mymap;
 

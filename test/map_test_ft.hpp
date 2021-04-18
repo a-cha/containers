@@ -220,7 +220,7 @@ int test_Map_ft () {
 	}
 
 
-	std::cout << std::endl << "---value_comp" << std::endl << std::endl;
+	std::cout << std::endl << "---getValueComp" << std::endl << std::endl;
 	{
 		ft::Map<char,int> mymap;
 
@@ -235,7 +235,7 @@ int test_Map_ft () {
 		 ft::Map<char,int>::iterator it = mymap.begin();
 		do {
 			std::cout << it->first << " => " << it->second << '\n';
-		} while ( mymap.value_comp()(*it++, highest) );
+		} while (mymap.value_comp()(*it++, highest) );
 	}
 
 
