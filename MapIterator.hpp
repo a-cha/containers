@@ -29,71 +29,39 @@ namespace ft {
 	**	COPLIEN FORM					**
 	*************************************/
 	public:
-		MapIterator() : _data(NULL), _comp() {}
-		MapIterator(const MapIterator &other) : _data(other._data), _comp(other._comp) {}
-		const MapIterator &operator=(const MapIterator &other) {
-			_data = other._data;
-			_comp = other._comp;
-			return *this;
-		}
-		~MapIterator() {}
+		MapIterator();
+		MapIterator(const MapIterator & other);
+		const MapIterator &operator=(const MapIterator & other);
+		~MapIterator();
 
 	/*************************************
 	**	CONSTRUCTORS					**
 	*************************************/
 	public:
-		MapIterator(node *data) : _data(data), _comp() {}
-
-
-//	todo what is this?
-//		You need to add list_node and bidirectional_iterator as a friend for
-//		a logical comparison operator
-
-		template<class, class, class, class Alloc>
-		friend
-		class Map;
-
-		template<class, class>
-		friend
-		class MapIterator;
-
+		MapIterator(node *data);
 
 	/*************************************
 	**	OPERATORS						**
 	*************************************/
 	public:
-		ref operator*() const { return _data->_data; }
+		ref				operator*() const;
+		pointer			operator->() const;
+		MapIterator &	operator++();
+		MapIterator		operator++(int);
+		MapIterator &	operator--();
+		MapIterator		operator--(int);
 
-		pointer operator->() const { return &_data->_data; }
+		template<class, class, class, class Alloc>
+		friend class Map;
+		template<class, class>
+		friend class MapIterator;
 
-		template<class U>
-		friend bool operator==(const MapIterator<U, Compare> &lhs,
-							   const MapIterator<U, Compare> &rhs) {
+		friend bool operator==(const MapIterator<T, Compare>& lhs, const MapIterator<T, Compare>& rhs) {
 			return lhs._data == rhs._data;
+		};
+		friend bool operator!=(const MapIterator<T, Compare>& lhs, const MapIterator<T, Compare>& rhs) {
+			return !(lhs == rhs);
 		}
-
-		MapIterator &operator++() {
-			_data = next_node();
-			return *this;
-		}
-
-		MapIterator operator++(int) {
-			MapIterator tmp = *this;
-			++(*this);
-			return (tmp);
-		}
-
-		MapIterator &operator--() {
-			_data = prev_node();
-			return *this;
-		}
-
-		MapIterator operator--(int) {
-			MapIterator tmp = *this;
-			--(*this);
-			return (tmp);
-		}
-
 
 	/*************************************
 	**	FIELDS							**
@@ -102,45 +70,10 @@ namespace ft {
 		node *		_data;
 		Compare		_comp;
 
-		node *next_node() {
-			node *tmp = _data;
-			if (tmp->_height == 0) {
-				if (tmp->_parent->_right == tmp)
-					return tmp;
-				return tmp->_parent;
-			} else if (tmp->_right) {
-				tmp = tmp->_right;
-				while (tmp->_left)
-					tmp = tmp->_left;
-			} else {
-				while (!_comp(this->_data->_data.first, tmp->_data.first))
-					tmp = tmp->_parent;
-			}
-			return (tmp);
-		}
-
-		node *prev_node() {
-			node *tmp = _data;
-			if (tmp->_height == 0) {
-				if (tmp->_parent->_left == tmp)
-					return tmp;
-				return tmp->_parent;
-			} else if (tmp->_left) {
-				tmp = tmp->_left;
-				while (tmp->_right)
-					tmp = tmp->_right;
-			} else {
-				while (!_comp(tmp->_data.first, this->_data->_data.first))
-					tmp = tmp->_parent;
-			}
-			return (tmp);
-		}
-
+		/**	Utils						*/
+		node *next_node();
+		node *prev_node();
 	};
-
-	template<class U, class Compare>
-	bool operator!=(const MapIterator<U, Compare> &lhs,
-					const MapIterator<U, Compare> &rhs) {
-		return !(lhs == rhs);
-	}
 }
+
+#include "MapIterator.ipp"
