@@ -135,15 +135,13 @@ namespace ft {
 		/**	Tree						*/
 		node *					treeAdd(node * current, node * new_node);
 		node *					balance(node * current);
-//		todo: what is this?
-		int						BF(node * current);
+		int						balanceFactor(node * current);
 		void					treeOverHead(node * current);
 		node *					treeRight(node * r);
 		node *					treeLeft(node * l);
 		node *					treeGetInit(node * current);
 		node *					treeFindRec(node * current, const key_type k) const;
-//		todo: what is this?
-		node *					FIND_NEAR(node * current, const key_type& k) const;
+		node *					findNearestValue(node * current, const key_type& k) const;
 		void					linkTreeDefault() const;
 		void					unlinkTree() const;
 		node *					pushNode(node * current, node* new_node);

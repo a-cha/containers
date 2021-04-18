@@ -298,7 +298,7 @@ namespace ft {
 		node * tmp;
 
 		unlinkTree();
-		tmp = FIND_NEAR(_init_node, k);
+		tmp = findNearestValue(_init_node, k);
 		linkTreeDefault();
 		if (k > tmp->_data.first)
 			return ++iterator(tmp);
@@ -311,7 +311,7 @@ namespace ft {
 		node * tmp;
 
 		unlinkTree();
-		tmp = FIND_NEAR(_init_node, k);
+		tmp = findNearestValue(_init_node, k);
 		linkTreeDefault();
 		if (k > tmp->_data.first)
 			return ++const_iterator(tmp);
@@ -448,14 +448,14 @@ namespace ft {
 	typename Map<Key, T, Compare, Alloc>::node *Map<Key, T, Compare, Alloc>
 	        ::balance(Map::node *current) {
 		treeOverHead(current);
-		int  BF_count = BF(current);
+		int  BF_count = balanceFactor(current);
 		if (BF_count == 2) {
-			if (BF(current->_right)<0)
+			if (balanceFactor(current->_right) < 0)
 				current->_right = treeRight(current->_right);
 			return treeLeft(current);
 		}
 		if (BF_count == -2) {
-			if (BF(current->_left)>0)
+			if (balanceFactor(current->_left) > 0)
 				current->_left = treeLeft(current->_left);
 			return treeRight(current);
 		}
@@ -463,13 +463,13 @@ namespace ft {
 	}
 
 	template<class Key, class T, class Compare, class Alloc>
-	int Map<Key, T, Compare, Alloc>::BF(Map::node *current) {
+	int Map<Key, T, Compare, Alloc>::balanceFactor(Map::node *current) {
 		int h_left = 0;
 		int h_right = 0;
 
 		h_left = (current->_left ? current->_left->_height : 0);
 		h_right = (current->_right ? current->_right->_height : 0);
-		return ((h_right) - (h_left));
+		return h_right - h_left;
 	}
 
 	template<class Key, class T, class Compare, class Alloc>
@@ -550,15 +550,15 @@ namespace ft {
 
 	template<class Key, class T, class Compare, class Alloc>
 	typename Map<Key, T, Compare, Alloc>::node * Map<Key, T, Compare, Alloc>
-	        ::FIND_NEAR(Map::node *current, const key_type &k) const {
+	        ::findNearestValue(Map::node *current, const key_type &k) const {
 		if (!current)
 			return NULL;
 		else if (_key_comp(current->_data.first, k)) {
-			node* tmp = FIND_NEAR(current->_right, k);
+			node* tmp = findNearestValue(current->_right, k);
 			if (tmp) return tmp;
 		}
 		else if (_key_comp(k, current->_data.first)) {
-			node* tmp = FIND_NEAR(current->_left, k);
+			node* tmp = findNearestValue(current->_left, k);
 			if (tmp) return tmp;
 		}
 		return current;
