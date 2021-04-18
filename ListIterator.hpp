@@ -52,11 +52,6 @@ namespace ft {
 	public:
 		node_type *getPoint() const;
 
-//	todo do i need this strange method?
-		node_type * &ptr() {
-			return this->_point;
-		}
-
 	/*************************************
 	**	OPERATORS						**
 	*************************************/

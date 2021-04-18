@@ -480,9 +480,8 @@ namespace ft {
 		}
 		while (end.getPoint()->getPrev())
 			--end;
-		this->_beginNode = end.ptr();
+		this->_beginNode = end.getPoint();
 	}
-
 #pragma endregion
 
 /**	OPERATORS						**/
