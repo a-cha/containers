@@ -34,4 +34,4 @@ add_executable(containers
         MapNode.hpp
         MapIterator.hpp
 
-        )
+        Map.ipp)
