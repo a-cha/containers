@@ -4,7 +4,6 @@
 
 #pragma once
 
-// todo: #include "utils"
 #include "MapIterator.hpp"
 #include "RevIterator.hpp"
 #include "MapNode.hpp"
@@ -13,7 +12,6 @@
 # include <sstream>
 # include <typeinfo>
 # include <iostream>
-
 
 namespace ft {
 
@@ -26,40 +24,29 @@ namespace ft {
 	**	ALIASES							**
 	*************************************/
 	public:
-		typedef Key															key_type;
-		typedef T															mapped_type;
-		typedef ft::pair<const Key, T>										value_type;
-		typedef ft::MapNode<value_type>										node_type;
-		typedef Compare														key_compare;
-		typedef ft::less<value_type>										value_compare;
-		typedef Alloc														allocator_type;
-		typedef typename allocator_type::reference							reference;
-		typedef typename allocator_type::const_reference					const_reference;
-		typedef typename allocator_type::pointer							pointer;
-		typedef typename allocator_type::const_pointer						const_pointer;
-		typedef MapIterator<value_type, key_compare>						iterator;
-		typedef MapIterator<const value_type, key_compare>					const_iterator;
-		typedef ft::reverse_iterator<iterator>								reverse_iterator;
-		typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
-		typedef std::ptrdiff_t												difference_type;
-		typedef std::size_t													size_type;
-		typedef ft::MapNode<typename ft::remove_const<value_type>::type>	node;
-
-
+		typedef Key														key_type;
+		typedef T														mapped_type;
+		typedef ft::pair<const Key, T>									value_type;
+		typedef ft::MapNode<value_type>									node_type;
+		typedef Compare													key_compare;
+		typedef ft::less<value_type>									value_compare;
+		typedef Alloc													allocator_type;
+		typedef typename allocator_type::reference						reference;
+		typedef typename allocator_type::const_reference				const_reference;
+		typedef typename allocator_type::pointer						pointer;
+		typedef typename allocator_type::const_pointer					const_pointer;
+		typedef MapIterator<value_type, key_compare>					iterator;
+		typedef MapIterator<const value_type, key_compare>				const_iterator;
+		typedef RevIterator<iterator>									reverse_iterator;
+		typedef RevIterator<const_iterator>								const_reverse_iterator;
+		typedef std::ptrdiff_t											difference_type;
+		typedef std::size_t												size_type;
+		typedef ft::MapNode<typename ft::is_const<value_type>::type>	node;
 
 	/*************************************
 	**	COPLIEN FORM					**
 	*************************************/
 	public:
-		explicit Map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) :
-				_alloc(alloc), _comp(comp), _init_node(NULL) {
-			_start_node = CreatInit();
-			_end_node = CreatInit();
-			_length = 0;
-
-			LinkDefaultTree();
-		}
-
 		Map (const Map& x): _alloc(x._alloc), _comp(x._comp), _init_node(NULL) {
 			_start_node = CreatInit();
 			_end_node = CreatInit();
@@ -86,9 +73,18 @@ namespace ft {
 	**	CONSTRUCTORS					**
 	*************************************/
 	public:
+		explicit Map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) :
+				_alloc(alloc), _comp(comp), _init_node(NULL) {
+			_start_node = CreatInit();
+			_end_node = CreatInit();
+			_length = 0;
+
+			LinkDefaultTree();
+		}
+
 		template <class InputIterator>
 		Map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type&
-		alloc = allocator_type(), typename enable_if<is_input_iterator<InputIterator>::value>::type* = NULL):
+		alloc = allocator_type()) :
 				_alloc(alloc), _comp(comp), _init_node(NULL) {
 			_start_node = CreatInit();
 			_end_node = CreatInit();
@@ -166,8 +162,7 @@ namespace ft {
 
 
 		template <class InputIterator>
-		void insert (InputIterator first, InputIterator last,
-					 typename enable_if<is_input_iterator<InputIterator>::value>::type* = NULL) {
+		void insert (InputIterator first, InputIterator last) {
 			while (first != last) {
 				insert(*first);
 				++first;

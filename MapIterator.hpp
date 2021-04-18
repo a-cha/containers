@@ -5,7 +5,7 @@
 #pragma once
 
 #include "MapNode.hpp"
-// todo #include "utils"
+#include "Algorithm.hpp"
 
 namespace ft {
 
@@ -17,15 +17,13 @@ namespace ft {
 	**	ALIASES							**
 	*************************************/
 	public:
-		typedef T														value_type;
-		typedef value_type &											reference;
-		typedef value_type const &										const_reference;
-		typedef value_type *											pointer;
-		typedef value_type const *										const_pointer;
-//		todo what is this tags? (never used)
-		typedef ft::bidirectional_iterator_tag							iterator_category;
-		typedef std::ptrdiff_t											difference_type;
-		typedef MapNode<typename ft::remove_const<value_type>::type>	node;
+		typedef T													value_type;
+		typedef value_type &										ref;
+		typedef value_type const &									const_ref;
+		typedef value_type *										pointer;
+		typedef value_type const *									const_point;
+		typedef std::ptrdiff_t										difference_type;
+		typedef MapNode<typename ft::is_const<value_type>::type>	node;
 
 	/*************************************
 	**	COPLIEN FORM					**
@@ -47,7 +45,7 @@ namespace ft {
 		MapIterator(node *data) : _data(data), _comp() {}
 
 
-//	todo what is it?
+//	todo what is this?
 //		You need to add list_node and bidirectional_iterator as a friend for
 //		a logical comparison operator
 
@@ -64,7 +62,7 @@ namespace ft {
 	**	OPERATORS						**
 	*************************************/
 	public:
-		reference operator*() const { return _data->_data; }
+		ref operator*() const { return _data->_data; }
 
 		pointer operator->() const { return &_data->_data; }
 

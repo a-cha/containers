@@ -79,7 +79,6 @@ namespace ft {
 		allocator_type 	_alloc;
 		_pair_pointer	_pair_init;
 
-//		todo: why these fields are public
 	public:
 		MapNode*		_parent;
 		MapNode*		_right;
