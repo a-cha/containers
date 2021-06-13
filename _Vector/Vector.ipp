@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "Algorithm.hpp"
+#include "../utils/Algorithm.hpp"
 
 namespace ft {
 
@@ -13,15 +13,15 @@ namespace ft {
 
 	template<typename T>
 	Vector<T>::Vector() :
-		_cont(),
-		_capacity(0),
-		_size(0) {}
+        _cont(nullptr),
+        _size(0),
+		_capacity(0) {}
 
 	template<typename T>
 	Vector<T>::Vector(const Vector &other) :
-		_cont(),
-		_capacity(0),
-		_size(other._size) {
+        _cont(nullptr),
+        _size(other._size),
+		_capacity(0) {
 			reserve(other._capacity);
 			std::memcpy(static_cast<void*>(_cont), static_cast<void*>(other._cont), other._size * sizeof(value_type));
 		}

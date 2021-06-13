@@ -2,8 +2,6 @@
 // Created by Skipjack Adolph on 4/14/21.
 //
 
-#include "List.hpp"
-
 namespace ft {
 
 	template<typename T, typename C = List<T> >

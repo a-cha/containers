@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include "RevIterator.hpp"
-#include "Algorithm.hpp"
+#include "../utils/RevIterator.hpp"
+#include "../utils/Algorithm.hpp"
 #include <limits>
 
 namespace ft {

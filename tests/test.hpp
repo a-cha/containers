@@ -2,24 +2,14 @@
 #ifndef TEST_HPP
 # define TEST_HPP
 
-# ifdef def_test_full
-#  define FULL
-
-# endif
 # include <iostream>
 
-# include "../List.hpp"
-# include "../Stack.hpp"
-# include "../Queue.hpp"
-# include "../Vector.hpp"
-# include "../Map.hpp"
+# include "../_List/List.hpp"
+# include "../_Stack/Stack.hpp"
+# include "../_Queue/Queue.hpp"
+# include "../_Vector/Vector.hpp"
+# include "../_Map/Map.hpp"
 
-/*
-# include "../include/Set.hpp"
-# include "set_test.hpp"
-# include "../include/Deque.hpp"
-# include "deque_test.hpp"
-*/
 # include <vector>
 # include <list>
 # include <stack>

@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "Algorithm.hpp"
+#include "../utils/Algorithm.hpp"
 
 namespace ft {
 
@@ -13,17 +13,17 @@ namespace ft {
 
 	template<typename T, class Alloc>
 	List<T, Alloc>::List() :
+			_size(0),
 			_beginNode(),
-			_endNode(),
-			_size(0) {
+			_endNode() {
 		this->make_bounds();
 	}
 
 	template<typename T, class Alloc>
 	List<T, Alloc>::List(const List &other) :
-			_beginNode(),
-			_endNode(),
-			_size(0) {
+            _size(0),
+            _beginNode(),
+			_endNode() {
 		this->make_bounds();
 		this->assign(other.begin(), other.end());
 	}

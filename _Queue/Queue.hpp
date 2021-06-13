@@ -4,8 +4,6 @@
 
 #pragma once
 
-#include "List.hpp"
-
 namespace ft {
 
 	template<typename T, typename C = List<T> >

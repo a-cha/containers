@@ -5,7 +5,7 @@
 #pragma once
 
 #include "MapNode.hpp"
-#include "Algorithm.hpp"
+#include "../utils/Algorithm.hpp"
 
 namespace ft {
 

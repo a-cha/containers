@@ -1,7 +1,6 @@
 #ifndef LIST_TEST_HPP
 # define LIST_TEST_HPP
 
-#include "../List.hpp"
 #include "test.hpp"
 
 template<typename T>

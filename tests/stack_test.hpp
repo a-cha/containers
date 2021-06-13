@@ -48,7 +48,7 @@ void test_Stack(void)
 		ctn.push_back(42);
 		ctn.push_back(43);
 		ctn.push_back(99);
-		display_container("[5, 42, 43, 99] {List or Deque}:", ctn);
+		display_container("[5, 42, 43, 99] {_List or Deque}:", ctn);
 			assert(ctn.size() == 4);
 
 		StackType stk1(ctn);
@@ -76,7 +76,7 @@ void test_Stack(void)
 		std::cout << "[] (size: " << stk1.size() << ")\n";
 			assert(stk1.size() == 0);
 
-		display_container("[5, 42, 43, 99] {ft::List after, no change}:", ctn);
+		display_container("[5, 42, 43, 99] {ft::_List after, no change}:", ctn);
 	}
 
 	std::cout << "\n---comparison\n\n";
