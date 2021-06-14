@@ -8,4 +8,4 @@ All theirs methods from C++98 standard available.
 
 ## Usage
 
-You can use the project by using attached CMake file. It is currently configured to run tests.
+You can use the project by using attached `CMakeLists.txt` file. It is currently configured to run tests.
