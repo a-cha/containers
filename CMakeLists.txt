@@ -2,9 +2,11 @@ cmake_minimum_required(VERSION 3.17)
 project(containers)
 
 set(CMAKE_CXX_STANDARD 98)
-set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Werror")
+set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Werror -std=c++98 -pedantic")
 
 add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
+
+include_directories(_List _Map _Queue _Stack _Vector)
 
 add_executable(containers
         tests/queue_test.hpp

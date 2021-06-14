@@ -4,11 +4,11 @@
 
 # include <iostream>
 
-# include "../_List/List.hpp"
-# include "../_Stack/Stack.hpp"
-# include "../_Queue/Queue.hpp"
-# include "../_Vector/Vector.hpp"
-# include "../_Map/Map.hpp"
+# include "List.hpp"
+# include "Stack.hpp"
+# include "Queue.hpp"
+# include "Vector.hpp"
+# include "Map.hpp"
 
 # include <vector>
 # include <list>

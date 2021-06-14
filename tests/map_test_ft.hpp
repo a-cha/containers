@@ -325,7 +325,7 @@ int test_Map_ft () {
 		int i;
 		ft::Map<int,int> mymap;
 
-		std::cout << "max size: " << mymap.max_size() << std::endl;
+//		std::cout << "max size: " << mymap.max_size() << std::endl;
 		if (mymap.max_size()>1000)
 		{
 			for (i=0; i<10; i++) mymap[i]=0;

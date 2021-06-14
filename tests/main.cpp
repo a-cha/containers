@@ -6,7 +6,7 @@
 /*
 ** std tests
 */
-void start_all_std_tests(void) {
+void start_all_std_tests() {
 	test("_List");
 	test_List<std::list<int>, int>();
 	end_test("_List");
@@ -33,7 +33,7 @@ void start_all_std_tests(void) {
 /*
 ** ft tests
 */
-void start_all_ft_tests(void) {
+void start_all_ft_tests() {
 	test("_List");
 	test_List<ft::List<int>, int>();
 	end_test("_List");
@@ -59,21 +59,26 @@ void start_all_ft_tests(void) {
 
 int main()
 {
-	std::streambuf *coutbuf = std::cout.rdbuf();
+	std::streambuf  *coutbuf = std::cout.rdbuf();
+	std::string relativePathFromExecutable = "../tests/";
 
-	std::ofstream stdOut("/Users/antoncaparin/21/containers/std_out");
+	std::ofstream stdOut(relativePathFromExecutable + "std_out");
 	std::cout.rdbuf(stdOut.rdbuf());
 	start_all_std_tests();
 	stdOut.close();
 
 	std::cout.rdbuf(coutbuf);
 
-	std::ofstream ftOut("/Users/antoncaparin/21/containers/ft_out");
+	std::ofstream ftOut(relativePathFromExecutable + "my_out");
 	std::cout.rdbuf(ftOut.rdbuf());
 	start_all_ft_tests();
 	ftOut.close();
 
 	std::cout.rdbuf(coutbuf);
+
+	relativePathFromExecutable = relativePathFromExecutable + "test.sh " + relativePathFromExecutable;
+	std::cout << relativePathFromExecutable << std::endl;
+	system(relativePathFromExecutable.c_str());
 
 	return (0);
 }
