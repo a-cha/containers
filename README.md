@@ -8,7 +8,4 @@ All theirs methods from C++98 standard available.
 
 ## Usage
 
-Run `make` inside the working directory to create `containers.a`
-library.
-
-Run `make test` to check project's functionality.
+You can use the project by using attached CMake file. It is currently configured to run tests.
